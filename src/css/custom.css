@@ -1,0 +1,298 @@
+/**
+ * GovChat-NL branding — blauw overheidsthema
+ * Gebaseerd op de huisstijl van govchat-nl.nl
+ */
+
+:root {
+  --ifm-color-primary: #154273;
+  --ifm-color-primary-dark: #123b68;
+  --ifm-color-primary-darker: #113862;
+  --ifm-color-primary-darkest: #0e2e51;
+  --ifm-color-primary-light: #18497e;
+  --ifm-color-primary-lighter: #194c84;
+  --ifm-color-primary-lightest: #1d5695;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --hero-gradient-1: #154273;
+  --hero-gradient-2: #1d5695;
+  --hero-gradient-3: #2a72b4;
+  --hero-gradient-4: #0e2e51;
+  --section-alt-bg: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #6db3f2;
+  --ifm-color-primary-dark: #4fa2ef;
+  --ifm-color-primary-darker: #3f99ed;
+  --ifm-color-primary-darkest: #1a7fe6;
+  --ifm-color-primary-light: #8bc4f5;
+  --ifm-color-primary-lighter: #9bcdf7;
+  --ifm-color-primary-lightest: #c8e4fb;
+  --ifm-background-color: #1a1a2e;
+  --ifm-background-surface-color: #1e1e34;
+  --ifm-color-emphasis-200: #3a3a5c;
+  --ifm-color-emphasis-300: #4a4a6a;
+  --ifm-font-color-base: #e2e2ef;
+  --ifm-heading-color: #f0f0fa;
+  --ifm-color-content: #e2e2ef;
+  --ifm-color-content-secondary: #b0b0cc;
+  --ifm-link-color: #6db3f2;
+  --ifm-table-stripe-background: rgba(255, 255, 255, 0.04);
+  --ifm-table-border-color: #3a3a5c;
+  --ifm-code-background: rgba(110, 179, 242, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(110, 179, 242, 0.15);
+  --hero-gradient-1: #0e1a38;
+  --hero-gradient-2: #152040;
+  --hero-gradient-3: #1a3060;
+  --hero-gradient-4: #0a1628;
+  --section-alt-bg: rgba(255, 255, 255, 0.04);
+}
+
+/* Dark mode — tabellen */
+[data-theme='dark'] table {
+  border-color: #3a3a5c;
+}
+
+[data-theme='dark'] table thead tr {
+  background-color: #252545;
+  border-bottom: 2px solid #4a4a6a;
+}
+
+[data-theme='dark'] table thead th {
+  color: #f0f0fa;
+}
+
+[data-theme='dark'] table tbody tr {
+  border-bottom: 1px solid #2e2e4a;
+}
+
+[data-theme='dark'] table tbody tr:nth-child(2n) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Dark mode — code blokken */
+[data-theme='dark'] code {
+  border: 1px solid rgba(110, 179, 242, 0.15);
+}
+
+[data-theme='dark'] pre code {
+  border: none;
+}
+
+/* Dark mode — admonitions */
+[data-theme='dark'] .alert {
+  border-left-width: 4px;
+}
+
+[data-theme='dark'] .alert--info {
+  background-color: rgba(110, 179, 242, 0.08);
+  border-left-color: #6db3f2;
+}
+
+[data-theme='dark'] .alert--warning {
+  background-color: rgba(242, 201, 76, 0.08);
+  border-left-color: #f2c94c;
+}
+
+[data-theme='dark'] .alert--danger {
+  background-color: rgba(235, 87, 87, 0.08);
+  border-left-color: #eb5757;
+}
+
+[data-theme='dark'] .alert--success {
+  background-color: rgba(39, 174, 96, 0.08);
+  border-left-color: #27ae60;
+}
+
+/* Dark mode — feature cards */
+[data-theme='dark'] [class*='featureCard'] {
+  background-color: #1e1e34;
+  border-color: #2e2e4a;
+  color: #e2e2ef;
+}
+
+[data-theme='dark'] [class*='featureCard']:hover {
+  border-color: #6db3f2;
+  box-shadow: 0 4px 20px rgba(109, 179, 242, 0.1);
+}
+
+[data-theme='dark'] [class*='featureIconCircle'] {
+  background-color: #6db3f2;
+  color: #0e1a38;
+}
+
+/* Dark mode — video/image wrappers */
+[data-theme='dark'] [class*='VideoWrapper'],
+[data-theme='dark'] [class*='ImageWrapper'] {
+  border-color: #2e2e4a;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark mode — LEGO images */
+[data-theme='dark'] [class*='legoImage'] {
+  border-color: #2e2e4a;
+}
+
+/* Dark mode — navbar */
+[data-theme='dark'] .navbar {
+  background-color: #161628;
+  box-shadow: none;
+  border-bottom: 1px solid #2e2e4a;
+}
+
+[data-theme='dark'] .navbar__link {
+  color: #d0d0e4;
+}
+
+[data-theme='dark'] .navbar__link:hover,
+[data-theme='dark'] .navbar__link--active {
+  color: #6db3f2;
+}
+
+[data-theme='dark'] .navbar-github-link {
+  background-color: #6db3f2;
+  color: #0e1a38 !important;
+}
+
+[data-theme='dark'] .navbar-github-link:hover {
+  background-color: #8bc4f5;
+  color: #0e1a38 !important;
+}
+
+/* Dark mode — sidebar */
+[data-theme='dark'] .menu__link {
+  color: #c0c0d8;
+}
+
+[data-theme='dark'] .menu__link:hover {
+  color: #6db3f2;
+  background-color: rgba(110, 179, 242, 0.08);
+}
+
+[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
+  color: #6db3f2;
+  background-color: rgba(110, 179, 242, 0.12);
+}
+
+/* Dark mode — TOC rechter sidebar */
+[data-theme='dark'] .table-of-contents__link {
+  color: #b0b0cc;
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
+  color: #6db3f2;
+}
+
+/* Dark mode — blockquote */
+[data-theme='dark'] blockquote {
+  border-left-color: #4a4a6a;
+  color: #b0b0cc;
+}
+
+/* Dark mode — hr */
+[data-theme='dark'] hr {
+  border-color: #2e2e4a;
+}
+
+/* Globale typografie */
+body {
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+}
+
+/* ==========================================================================
+   Navbar — strak, Dyte-stijl
+   ========================================================================== */
+
+.navbar {
+  box-shadow: none;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+}
+
+.navbar__link {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Highlighted GitHub CTA knop in navbar */
+.navbar-github-link {
+  background-color: var(--ifm-color-primary);
+  color: #fff !important;
+  border-radius: 6px;
+  padding: 0.35rem 0.9rem !important;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.navbar-github-link:hover {
+  background-color: var(--ifm-color-primary-dark);
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+/* Footer */
+.footer--dark {
+  background-color: #0e2e51;
+}
+
+/* Admonition / info boxes */
+.admonition {
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   Docs — afbeeldingen en diagrammen op volle breedte
+   ========================================================================== */
+
+article img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mermaid diagrammen op volle breedte forceren */
+[class*='mermaid'] {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+[class*='mermaid'] svg {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Fallback: elk SVG met mermaid ID */
+svg[id^='mermaid'] {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+/* Docs content kolom breder maken — dubbele selector voor hogere specificiteit */
+.col[class*='docItemCol'] {
+  max-width: 100% !important;
+  flex: 1 !important;
+}
+
+/* ==========================================================================
+   Accessibility — reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

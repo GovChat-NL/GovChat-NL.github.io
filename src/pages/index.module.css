@@ -1,0 +1,475 @@
+/* ==========================================================================
+   Hero — clean two-column layout, gradient background
+   ========================================================================== */
+
+.hero {
+  padding: 5rem 0 0;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    var(--hero-gradient-1),
+    var(--hero-gradient-2),
+    var(--hero-gradient-3)
+  );
+  color: #fff;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding-bottom: 4rem;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.heroLogo {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+}
+
+.heroTitle {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+  max-width: 14ch;
+}
+
+.heroSubtitle {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  opacity: 0.88;
+  max-width: 440px;
+  margin: 0;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #fff;
+  color: #154273;
+  border: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroCta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  color: #154273;
+  text-decoration: none;
+}
+
+.heroCtaOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.heroCtaOutline:hover {
+  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.heroImageWrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.heroImage {
+  width: 100%;
+  display: block;
+}
+
+.heroWave {
+  line-height: 0;
+  margin-top: -1px;
+}
+
+.heroWave svg {
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
+/* ==========================================================================
+   Stats — horizontal strip
+   ========================================================================== */
+
+.statsBar {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+.statItem {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.statNumber {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--ifm-color-primary);
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-600);
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   Section — shared
+   ========================================================================== */
+
+.sectionTitle {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  line-height: 1.15;
+}
+
+.sectionSubtitle {
+  font-size: 1.05rem;
+  color: var(--ifm-color-emphasis-600);
+  max-width: 600px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ==========================================================================
+   "Waarom GovChat-NL?" — clean grid, no heavy cards
+   ========================================================================== */
+
+.whySection {
+  padding: 5rem 0;
+}
+
+.whySectionHeader {
+  margin-bottom: 3rem;
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.featureLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.featureLink:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.featureCard {
+  padding: 1.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--ifm-toc-border-color);
+  height: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--ifm-background-color);
+}
+
+.featureCard:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 4px 20px rgba(21, 66, 115, 0.08);
+}
+
+.featureIconCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: var(--ifm-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.featureTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.featureDescription {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Video demo section — full-width with context
+   ========================================================================== */
+
+.demoSection {
+  padding: 5rem 0;
+  background: var(--section-alt-bg);
+}
+
+.demoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.demoVideoWrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--ifm-toc-border-color);
+}
+
+.demoVideo {
+  width: 100%;
+  display: block;
+}
+
+.demoText {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.demoLink {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.demoLink:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   LEGO concept — alternating rows
+   ========================================================================== */
+
+.legoSection {
+  padding: 5rem 0;
+}
+
+.legoSectionHeader {
+  margin-bottom: 3rem;
+}
+
+.legoItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.legoItem:last-child {
+  margin-bottom: 0;
+}
+
+.legoItemReverse {
+  direction: rtl;
+}
+
+.legoItemReverse > * {
+  direction: ltr;
+}
+
+.legoImageWrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--ifm-toc-border-color);
+}
+
+.legoImage {
+  width: 100%;
+  display: block;
+}
+
+.legoText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.legoTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.legoDescription {
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.legoLink {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.legoLink:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Scroll animations
+   ========================================================================== */
+
+.fadeInUp {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media screen and (max-width: 996px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+    max-width: none;
+  }
+
+  .heroImageWrapper {
+    max-width: 560px;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .whyGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .demoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .legoItem,
+  .legoItemReverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .hero {
+    padding: 3rem 0 0;
+  }
+
+  .heroGrid {
+    padding-bottom: 2.5rem;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .statNumber {
+    font-size: 1.6rem;
+  }
+
+  .whyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .whySection,
+  .demoSection,
+  .legoSection {
+    padding: 3.5rem 0;
+  }
+}

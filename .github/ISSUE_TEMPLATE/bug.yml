@@ -1,0 +1,38 @@
+name: "Bug in documentatiesite"
+description: "Iets werkt niet goed op de website: kapotte link, weergavefout, build-probleem"
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Soort probleem
+      options:
+        - Kapotte link
+        - Weergavefout
+        - Build/deploy probleem
+        - Pagina niet bereikbaar
+        - Anders
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL of pagina (indien van toepassing)
+      placeholder: "https://govchat-nl.github.io/GovChat-NL/docs/..."
+    validations:
+      required: false
+  - type: textarea
+    id: beschrijving
+    attributes:
+      label: Beschrijving
+      description: Wat gaat er mis en wat verwacht je?
+      placeholder: "Wanneer ik naar ... ga, zie ik ..."
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot (optioneel)
+      description: Sleep een screenshot hierin als dat het probleem verduidelijkt.
+    validations:
+      required: false

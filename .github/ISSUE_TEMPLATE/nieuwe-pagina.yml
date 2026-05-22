@@ -1,0 +1,40 @@
+name: "Nieuwe documentatiepagina"
+description: "Voorstel voor een nieuwe pagina in de documentatie"
+labels: ["nieuwe pagina"]
+body:
+  - type: input
+    id: titel
+    attributes:
+      label: Titel van de pagina
+      placeholder: "Bijv. 'Apache Tika' of 'Backup en restore'"
+    validations:
+      required: true
+  - type: dropdown
+    id: sectie
+    attributes:
+      label: Onder welke sectie?
+      options:
+        - Visie
+        - Architectuur
+        - Handleidingen
+        - Implementaties
+        - App Launcher
+        - Nieuwe sectie
+    validations:
+      required: true
+  - type: textarea
+    id: inhoud
+    attributes:
+      label: Wat moet de pagina bevatten?
+      description: Beschrijf de gewenste inhoud en voor wie de pagina bedoeld is.
+      placeholder: "De pagina moet uitleggen hoe..."
+    validations:
+      required: true
+  - type: textarea
+    id: bronnen
+    attributes:
+      label: Beschikbare bronnen (optioneel)
+      description: Links, documenten of andere bronnen die als input kunnen dienen.
+      placeholder: "Bijv. link naar configuratiedocument, bestaande wiki, etc."
+    validations:
+      required: false
