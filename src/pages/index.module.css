@@ -1,0 +1,99 @@
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.heroLogo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1rem;
+  border-radius: 20px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.features {
+  display: flex;
+  align-items: stretch;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.featureLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.featureLink:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.featureCard {
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  height: 100%;
+  margin-bottom: 1rem;
+}
+
+.featureCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.featureIcon {
+  margin-bottom: 0.75rem;
+  color: var(--ifm-color-primary);
+}
+
+/* Screenshot sectie */
+.screenshotSection {
+  padding: 3rem 0;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.screenshotRow {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.screenshotWrapper {
+  flex: 1;
+  max-width: 560px;
+  text-align: center;
+}
+
+.screenshot {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.screenshotLabel {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+}
