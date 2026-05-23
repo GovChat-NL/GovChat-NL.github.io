@@ -1,0 +1,60 @@
+name: "Inhoud reviewen of corrigeren"
+description: "Feedback op een bestaande documentatiepagina: fout, ontbrekende info of verbetering"
+labels: ["review"]
+body:
+  - type: dropdown
+    id: pagina
+    attributes:
+      label: Welke pagina betreft het?
+      options:
+        - visie/wat-is-govchat-nl
+        - visie/roadmap
+        - visie/governance
+        - visie/licenties
+        - architectuur/componenten
+        - architectuur/infrastructuur
+        - architectuur/n8n
+        - architectuur/qdrant
+        - architectuur/litellm
+        - handleidingen/snelle-start
+        - handleidingen/developer-modus
+        - handleidingen/sso-configuratie
+        - handleidingen/omgevingsvariabelen
+        - handleidingen/troubleshooting
+        - apps/overzicht
+        - apps/versimpelaar
+        - apps/beleidskompas
+        - apps/toekenner
+        - implementaties/provincie-limburg
+        - implementaties/gemeente-meierijstad
+        - Anders
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Soort feedback
+      options:
+        - Feitelijke fout
+        - Ontbrekende informatie
+        - Tekst onduidelijk
+        - Verouderde informatie
+        - Anders
+    validations:
+      required: true
+  - type: textarea
+    id: beschrijving
+    attributes:
+      label: Beschrijving
+      description: Wat klopt er niet of wat ontbreekt?
+      placeholder: "Beschrijf zo concreet mogelijk wat er aangepast moet worden."
+    validations:
+      required: true
+  - type: textarea
+    id: voorstel
+    attributes:
+      label: Voorgestelde tekst (optioneel)
+      description: Als je al weet hoe de tekst zou moeten luiden, zet die hier neer.
+      placeholder: "De aangepaste tekst..."
+    validations:
+      required: false

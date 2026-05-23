@@ -1,41 +1,38 @@
-# Website
+# GovChat-NL Documentatie
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+De documentatiesite van [GovChat-NL](https://github.com/GovChat-NL/GovChat-NL), gebouwd met [Docusaurus](https://docusaurus.io/).
 
-## Installation
+## Issues indienen
 
-```bash
-yarn
-```
+Heb je feedback op de documentatie? Je kunt een issue aanmaken via GitHub:
 
-## Local Development
+1. Ga naar [Issues](https://github.com/GovChat-NL/GovChat-NL.github.io/issues/new/choose)
+2. Kies een van de templates:
+   - **Inhoud reviewen of corrigeren** — Fout gevonden, informatie mist of is onduidelijk
+   - **Nieuwe documentatiepagina** — Voorstel voor een pagina die nog niet bestaat
+   - **Bug in documentatiesite** — Kapotte link, weergavefout of ander technisch probleem
+3. Vul het formulier in en klik op **Submit new issue**
 
-```bash
-yarn start
-```
+## Lokaal ontwikkelen
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-## Build
-
-```bash
-yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Deployment
-
-Using SSH:
+### Installatie
 
 ```bash
-USE_SSH=true yarn deploy
+npm install
 ```
 
-Not using SSH:
+### Development server
 
 ```bash
-GIT_USER=<Your GitHub username> yarn deploy
+npm start
 ```
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+Start een lokale development server met live-reload.
+
+### Build
+
+```bash
+npm run build
+```
+
+Genereert de statische site in de `build` directory.

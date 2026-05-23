@@ -9,6 +9,8 @@ const sidebars: SidebarsConfig = {
       items: [
         'visie/wat-is-govchat-nl',
         'visie/roadmap',
+        'visie/governance',
+        'visie/licenties',
       ],
     },
     {
@@ -17,6 +19,9 @@ const sidebars: SidebarsConfig = {
       items: [
         'architectuur/componenten',
         'architectuur/infrastructuur',
+        'architectuur/n8n',
+        'architectuur/qdrant',
+        'architectuur/litellm',
       ],
     },
     {
