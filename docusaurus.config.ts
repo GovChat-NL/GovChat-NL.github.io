@@ -115,7 +115,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://github.com/GovChat-NL/GovChat-NL.github.io',
+          href: 'https://github.com/GovChat-NL/GovChat-NL',
           label: 'GitHub',
           position: 'right',
           className: 'navbar-github-link',
