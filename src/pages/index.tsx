@@ -158,7 +158,7 @@ function HomepageHero() {
             </Link>
             <Link
               className={styles.heroCtaOutline}
-              to="https://github.com/GovChat-NL/GovChat-NL.github.io">
+              to="https://github.com/GovChat-NL/GovChat-NL">
               Bekijk op GitHub
             </Link>
           </div>
