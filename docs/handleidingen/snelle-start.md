@@ -7,6 +7,8 @@ title: "Snelle Start"
 
 GovChat-NL is een open-source AI-platform voor de overheid, gebaseerd op OpenWebUI. Hieronder vind je de snelste route naar een werkende installatie.
 
+> Op zoek naar de nieuwe LibreChat-stack met n8n orchestration? Gebruik de pre-release handleiding: [LibreChat pre-release quick start](./librechat-pre-release).
+
 ## Welke route past bij jou?
 
 | Doel | Route | Handleiding |
@@ -15,6 +17,7 @@ GovChat-NL is een open-source AI-platform voor de overheid, gebaseerd op OpenWeb
 | **Azure-omgeving** | Docker op Azure VM | [Azure VM](deployment/azure-vm) |
 | **AWS-omgeving** | Docker op AWS EC2 | [AWS EC2](deployment/aws-ec2) |
 | **Andere hosting** | Hetzner, DigitalOcean, bare metal | [Generieke VM](deployment/generieke-vm) |
+| **LibreChat (pre-release)** | LibreChat + n8n + n8n-openai-bridge | [LibreChat pre-release](./librechat-pre-release) |
 
 ## Wat heb je nodig?
 

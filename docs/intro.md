@@ -26,3 +26,5 @@ Interesse of vragen? Neem contact op via [ai@prvlimburg.nl](mailto:ai@prvlimburg
 - [Wat is GovChat-NL?](visie/wat-is-govchat-nl) — Visie, kernwaarden en architectuuroverzicht
 - [Snelle Start](handleidingen/snelle-start) — In 5 stappen aan de slag met Docker
 - [Implementaties](implementaties/provincie-limburg) — Voorbeelden uit de praktijk
+
+Voor de experimentele LibreChat-route, zie [LibreChat pre-release quick start](handleidingen/librechat-pre-release).
