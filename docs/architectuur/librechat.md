@@ -32,5 +32,5 @@ De LibreChat-variant onderzoekt een alternatief frontendpad naast OpenWebUI, met
 
 - [LibreChat quick start](../handleidingen/librechat-pre-release)
 - [LibreChat omgevingsvariabelen](../handleidingen/librechat-omgevingsvariabelen)
-- [GovChat-NL-LibreChat map](https://github.com/GovChat-NL/GovChat-NL/tree/main/GovChat-NL-LibreChat)
+- [GovChat-NL-LibreChat repository](https://github.com/GovChat-NL/GovChat-NL-LibreChat)
 

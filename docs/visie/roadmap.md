@@ -24,7 +24,7 @@ Focuspunten in dit onderzoek:
 
 Repository van deze onderzoekslijn:
 
-- [GovChat-NL-LibreChat (pre-release) in GovChat-NL repository](https://github.com/GovChat-NL/GovChat-NL/tree/main/GovChat-NL-LibreChat)
+- [GovChat-NL-LibreChat repository (pre-release)](https://github.com/GovChat-NL/GovChat-NL-LibreChat)
 
 Bijbehorende documentatie:
 

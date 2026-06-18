@@ -6,7 +6,7 @@ title: "LibreChat pre-release: omgevingsvariabelen"
 # LibreChat pre-release: omgevingsvariabelen
 
 :::warning Pre-release
-Deze variabelen horen bij de **LibreChat pre-release** stack in [`GovChat-NL-LibreChat`](https://github.com/GovChat-NL/GovChat-NL/tree/main/GovChat-NL-LibreChat).
+Deze variabelen horen bij de **LibreChat pre-release** stack in [`GovChat-NL-LibreChat`](https://github.com/GovChat-NL/GovChat-NL-LibreChat).
 :::
 
 Bronbestand: [`.env.example`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/.env.example)
