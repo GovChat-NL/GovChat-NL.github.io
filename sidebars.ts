@@ -29,6 +29,8 @@ const sidebars: SidebarsConfig = {
       label: 'Handleidingen',
       items: [
         'handleidingen/snelle-start',
+        'handleidingen/librechat-pre-release',
+        'handleidingen/librechat-omgevingsvariabelen',
         {
           type: 'category',
           label: 'Deployment',
