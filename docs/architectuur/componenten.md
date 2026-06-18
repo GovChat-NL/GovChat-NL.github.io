@@ -18,6 +18,17 @@ De web-interface en backend van GovChat-NL. Biedt:
 - **App Launcher** — Centrale hub voor AI-toepassingen
 - **Knowledge Base** — Upload en raadpleeg documenten
 
+## LibreChat (pre-release)
+
+Alternatieve frontend/backendlijn die momenteel als pre-release wordt onderzocht:
+
+- **Custom endpoint integratie** — Koppeling naar `n8n-openai-bridge`
+- **Streaming chat-afhandeling** — Realtime responsrichting via bridge + n8n
+- **n8n orchestration als default route** — Standaardchat kan via orchestrator-workflow lopen
+- **Governed model routing** — Via LiteLLM + workflowselectie
+
+Meer details: [LibreChat architectuur (pre-release)](./librechat) en [LibreChat quick start](../handleidingen/librechat-pre-release)
+
 ## LiteLLM
 
 Fungeert als router en adapter tussen de applicatie en AI-modellen:
@@ -59,3 +70,8 @@ Database voor alle persistente data:
 - Chatgeschiedenis
 - Configuratie en instellingen
 - Knowledge base metadata
+
+## Zie ook
+
+- [Infrastructuur](./infrastructuur) — Docker stack en deployment-keuzes
+- [LibreChat architectuur (pre-release)](./librechat) — Componenten en datastromen van de LibreChat-route

@@ -19,6 +19,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'architectuur/componenten',
         'architectuur/infrastructuur',
+        'architectuur/librechat',
         'architectuur/n8n',
         'architectuur/qdrant',
         'architectuur/litellm',
