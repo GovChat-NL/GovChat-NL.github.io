@@ -71,6 +71,22 @@ Voor volledige lijst en uitleg: [LibreChat pre-release omgevingsvariabelen](./li
 docker compose -f docker-compose.yml --env-file .env up -d
 ```
 
+### Troubleshooting: `admin-panel` pull faalt met GHCR 403
+
+Zie je bij opstarten een fout zoals `failed to fetch oauth token ... 403 Forbidden` voor `ghcr.io/clickhouse/librechat-admin-panel`?
+
+Dit wijst vaak op opgeslagen Docker-credentials voor GHCR met onvoldoende package-rechten. Docker probeert dan geauthenticeerd te pullen en GHCR weigert de aanvraag.
+
+Gebruik deze snelle fix:
+
+```bash
+docker logout ghcr.io
+docker compose -f docker-compose.yml --env-file .env pull admin-panel
+docker compose -f docker-compose.yml --env-file .env up -d
+```
+
+Verwachte uitkomst: `admin-panel` wordt daarna normaal gepulld en start mee.
+
 Optioneel met RAG-profiel:
 
 ```bash

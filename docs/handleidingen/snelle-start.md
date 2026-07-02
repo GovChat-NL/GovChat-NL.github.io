@@ -9,6 +9,8 @@ GovChat-NL is een open-source AI-platform voor de overheid, gebaseerd op OpenWeb
 
 > Op zoek naar de nieuwe LibreChat-stack met n8n orchestration? Gebruik de pre-release handleiding: [LibreChat pre-release quick start](./librechat-pre-release).
 
+> Krijg je bij LibreChat een `admin-panel` pull-fout met `403 Forbidden` op GHCR? Zie de korte troubleshooting-stappen in [LibreChat pre-release quick start](./librechat-pre-release#troubleshooting-admin-panel-pull-faalt-met-ghcr-403).
+
 ## Welke route past bij jou?
 
 | Doel | Route | Handleiding |
