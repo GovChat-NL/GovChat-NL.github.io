@@ -139,3 +139,17 @@ Voor een eerste werkende pre-release installatie zijn dit de belangrijkste varia
 
 Gebruik daarna de quick start: [LibreChat pre-release quick start](./librechat-pre-release).
 
+## Aanvullende `librechat.yaml` interface-opties
+
+Naast `.env` variabelen gebruikt deze stack ook interface-instellingen in [`GovChat-NL-LibreChat/librechat.yaml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/librechat.yaml).
+
+Voor deze pre-release staat de token/context-indicator standaard uit:
+
+```yaml
+interface:
+  contextUsage: false
+  contextCost: false
+```
+
+Dit voorkomt misleidende UI-usage bij n8n-georkestreerde flows met meerdere tussenstappen/toolcalls.
+

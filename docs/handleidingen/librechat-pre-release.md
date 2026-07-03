@@ -41,6 +41,18 @@ Relevante bestanden:
 - [`GovChat-NL-LibreChat/n8n-openai-bridge/models.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n-openai-bridge/models.json)
 - [`GovChat-NL-LibreChat/n8n/bootstrap/workflows/orchestrator-litellm.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n/bootstrap/workflows/orchestrator-litellm.json)
 
+### Token/context usage indicator (default uit)
+
+In deze pre-release staat de LibreChat context/token-indicator standaard uit in [`GovChat-NL-LibreChat/librechat.yaml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/librechat.yaml):
+
+```yaml
+interface:
+  contextUsage: false
+  contextCost: false
+```
+
+Reden: de chatflow loopt via n8n-orchestratie en toolstappen. De UI-indicator kan dan afwijken van de werkelijke end-to-end tokenconsumptie.
+
 ## Stap 1 — Voorbereiding
 
 - Docker Engine + Docker Compose plugin
