@@ -92,6 +92,22 @@ Bronbestand: [`.env.example`](https://github.com/GovChat-NL/GovChat-NL/blob/main
 | `N8N_LITELLM_IMAGE_API_KEY` | Nee | Fallback: `LITELLM_API_KEY` |
 | `N8N_LITELLM_IMAGE_MODEL` | Nee | Default: `gpt-image-1` |
 
+### 6c) Asynchrone image-jobs API (statusfeedback tijdens genereren)
+
+| Variabele | Verplicht | Opmerking |
+|---|---|---|
+| `IMAGE_JOBS_ENABLED` | Nee | `true`/`false`. Zet endpoint aan/uit. |
+| `IMAGE_JOBS_TOKEN` | Ja (als enabled) | Bearer of `x-govchat-token` voor `/govchat-api/image-jobs`. |
+| `IMAGE_JOBS_WEBHOOK_URL` | Nee | Default: `http://n8n:5678/webhook/image-generator` |
+| `IMAGE_JOBS_WEBHOOK_TOKEN` | Nee | Fallback: `N8N_WEBHOOK_TOKEN` |
+| `IMAGE_JOBS_CONCURRENCY` | Nee | Aantal parallelle workers (default `1`). |
+| `IMAGE_JOBS_TTL_HOURS` | Nee | Bewaart terminale jobs voor cleanup (default `24`). |
+
+Bijbehorende endpoints:
+
+- `POST /govchat-api/image-jobs` (start job, `202` + `job_id`)
+- `GET /govchat-api/image-jobs/:job_id` (poll status: `queued`, `running`, `succeeded`, `failed`)
+
 Technische notities:
 
 - JS runners gebruiken [`n8n/task-runners.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n/task-runners.json) met `NODE_FUNCTION_ALLOW_BUILTIN=fs,path,crypto`.
