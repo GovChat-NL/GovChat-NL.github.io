@@ -11,6 +11,12 @@ Deze route is een **pre-release** van GovChat-NL met LibreChat als frontend, n8n
 Geschikt voor testen, pilot-implementaties en iteratieve doorontwikkeling.
 :::
 
+:::warning Status webcrawler (experimenteel)
+De webcrawler / overheidscrawler is op dit moment een **experimentele feature** en nog **ver van af** voor volledige productie-inzet.
+
+Er zijn wel eerste stappen gezet (beheer in de admin-UI, run-overzichten, historisch inzicht en basis-optimalisaties), maar verdere uitwerking en hardening zijn nog nodig.
+:::
+
 ## Wat je krijgt in deze variant
 
 - `librechat` + `librechat-proxy`
