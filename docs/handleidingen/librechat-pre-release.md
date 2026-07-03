@@ -31,6 +31,10 @@ Standaard chat-flow:
 3. n8n Orchestrator AI Agent verwerkt de **volledige chat history** en streamt response terug
 4. Optioneel toolgebruik naar B1 Versimpelaar workflow
 
+Extra (optioneel):
+
+5. Orchestrator kan ook een image-tool gebruiken via LiteLLM (`/v1/images/generations`)
+
 Relevante bestanden:
 
 - [`GovChat-NL-LibreChat/librechat.yaml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/librechat.yaml)
@@ -65,6 +69,17 @@ Relevante bestanden:
 
 Voor volledige lijst en uitleg: [LibreChat pre-release omgevingsvariabelen](./librechat-omgevingsvariabelen).
 
+### Optioneel: image generation inschakelen
+
+Zet in [`.env.example`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/.env.example) de image-variabelen:
+
+- `N8N_ENABLE_IMAGE_TOOL=true`
+- `N8N_LITELLM_IMAGE_MODEL` (bijv. `gpt-image-1`)
+- optioneel `N8N_LITELLM_IMAGE_BASE_URL`
+- optioneel `N8N_LITELLM_IMAGE_API_KEY`
+
+Bij `N8N_ENABLE_IMAGE_TOOL=false` blijft de tool beschikbaar, maar geeft deze een nette melding terug dat image-generation is uitgeschakeld (niet-fataal).
+
 ## Stap 3 — Start de stack
 
 ```bash
@@ -93,6 +108,12 @@ Optioneel met RAG-profiel:
 docker compose -f docker-compose.yml --env-file .env --profile rag up -d
 ```
 
+Bij wijzigingen aan runner-config of image mounts is het verstandig `n8n` + `n8n-runners` expliciet te recreëren:
+
+```bash
+docker compose -f docker-compose.yml --env-file .env up -d --force-recreate n8n n8n-runners
+```
+
 ## Stap 4 — Controleer of alles draait
 
 ```bash
@@ -105,6 +126,13 @@ Controleer vervolgens:
 - Admin panel op `${ADMIN_PANEL_PUBLIC_URL}`
 - LiteLLM models endpoint op `${LITELLM_URL}/v1/models`
 - Bridge health (`/health`) en models (`/v1/models`)
+
+Voor image-generation aanvullend:
+
+- Controleer dat de JS runner built-ins toestaat via [`GovChat-NL-LibreChat/n8n/task-runners.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n/task-runners.json)
+  - `NODE_FUNCTION_ALLOW_BUILTIN=fs,path,crypto`
+- Controleer dat `/opt/librechat/images` op de host schrijfbaar is voor runner user (uid/gid `1000`), anders krijg je `EACCES` bij PNG write.
+- Bij base64 image output zet de workflow dit om naar een bestand in `/shared-images` en retourneert markdown `![...](...)`, zodat LibreChat inline kan renderen.
 
 ## Stap 5 — Modelbeheer (2 routes)
 
@@ -127,7 +155,10 @@ Bij start van de stack doet `n8n-bootstrap` automatisch:
 
 - import van LiteLLM credential (`openAiApi`)
 - import van Orchestrator en Versimpelaar workflows
+- import van optionele image-generator workflow
 - publish van beide workflows
+
+Als image-generation actief is, publish bootstrap ook de image workflow.
 
 Hierdoor is de LibreChat -> bridge -> n8n koppeling direct actief.
 

@@ -83,6 +83,21 @@ Bronbestand: [`.env.example`](https://github.com/GovChat-NL/GovChat-NL/blob/main
 | `N8N_LOG_LEVEL` | Nee |
 | `N8N_OPENAI_BRIDGE_BEARER_TOKEN` | Ja |
 
+### 6b) Optionele image-generation via orchestrator tool
+
+| Variabele | Verplicht | Opmerking |
+|---|---|---|
+| `N8N_ENABLE_IMAGE_TOOL` | Nee | `true`/`false`. Bij `false` geeft workflow een nette disabled-melding terug. |
+| `N8N_LITELLM_IMAGE_BASE_URL` | Nee | Fallback: `LITELLM_URL` |
+| `N8N_LITELLM_IMAGE_API_KEY` | Nee | Fallback: `LITELLM_API_KEY` |
+| `N8N_LITELLM_IMAGE_MODEL` | Nee | Default: `gpt-image-1` |
+
+Technische notities:
+
+- JS runners gebruiken [`n8n/task-runners.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n/task-runners.json) met `NODE_FUNCTION_ALLOW_BUILTIN=fs,path,crypto`.
+- Voor base64->PNG opslag moet hostmap `/opt/librechat/images` schrijfbaar zijn voor runner user (uid/gid `1000`).
+- Workflow retourneert markdown image-links zodat LibreChat inline kan renderen.
+
 ## 7) Overlay/Admin
 
 | Variabele | Verplicht |
