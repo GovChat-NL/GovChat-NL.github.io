@@ -180,3 +180,49 @@ Als image-generation actief is, publish bootstrap ook de image workflow.
 
 Hierdoor is de LibreChat -> bridge -> n8n koppeling direct actief.
 
+## Validatie / regressietest orchestrator
+
+Gebruik de robuuste validatiesuite op [`GovChat-NL-LibreChat/tests/orchestrator/run-validation.js`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/tests/orchestrator/run-validation.js).
+
+### Wat deze suite test
+
+- Tekstvragen (meerdere checks, o.a. eenvoudige kennisvraag en rekenvraag)
+- Multimodale vraag met afbeelding (cijferherkenning)
+- Beide webhook-shapes:
+  - `body.messages` (bridge/wrapped)
+  - `messages` op rootniveau
+
+### Benodigde testafbeelding
+
+Plaats je afbeelding standaard op:
+
+- [`GovChat-NL-LibreChat/tests/fixtures/number-grid.png`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/tests/fixtures/number-grid.png)
+
+Of geef een eigen pad mee met `--image`.
+
+### Uitvoeren
+
+```bash
+node GovChat-NL-LibreChat/tests/orchestrator/run-validation.js --expect 7
+```
+
+Optioneel met expliciet pad:
+
+```bash
+node GovChat-NL-LibreChat/tests/orchestrator/run-validation.js --image ./mijn-test.png --expect 7
+```
+
+Alleen teksttests draaien:
+
+```bash
+node GovChat-NL-LibreChat/tests/orchestrator/run-validation.js --only-text
+```
+
+### Exit-codes
+
+- `0` = alle tests geslaagd
+- `1` = functionele testfout (regressie)
+- `2` = geblokkeerd door omgeving/configuratie (bijv. geen bruikbaar taalmodel/provider geconfigureerd)
+
+Bij code `2` geeft de suite expliciet aan dat de validatie niet betrouwbaar kan worden uitgevoerd door ontbrekende of onjuiste model/provider-configuratie.
+
