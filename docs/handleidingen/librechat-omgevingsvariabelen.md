@@ -114,6 +114,28 @@ Technische notities:
 - Voor base64->PNG opslag moet hostmap `/opt/librechat/images` schrijfbaar zijn voor runner user (uid/gid `1000`).
 - Workflow retourneert markdown image-links zodat LibreChat inline kan renderen.
 
+### 6d) Multimodale image-input normalisatie (orchestrator)
+
+| Variabele | Verplicht | Opmerking |
+|---|---|---|
+| `CRAWLER_ADMIN_BASE_URL` | Nee | Base URL van overlay admin API. Default: `http://govchat-overlay-admin:3002`. |
+| `N8N_ORCHESTRATOR_IMAGE_DATA_URL_MAX_CHARS` | Nee | Fallback cap voor image data-url tekens. Default: `450000`. |
+| `N8N_ORCHESTRATOR_IMAGE_MAX_RESOLUTION_PX` | Nee | Fallback cap voor langste afbeeldingszijde. Default: `1568`. |
+| `N8N_ORCHESTRATOR_VISION_MODEL` | Nee | Vision-model alias voor multimodale precompute. Default: `gpt-5.4`. |
+
+Gedrag:
+
+- De orchestrator-workflow leest actuele limieten via `GET /api/config/orchestrator`.
+- Data-urls worden per image genormaliseerd via `POST /api/config/orchestrator/normalize-image`.
+- Als admin-config ontbreekt, gebruikt de workflow bovenstaande env-fallbacks.
+
+Bijbehorende beheer-UI:
+
+- Route `/orchestrator-editor` in [`GovChat-AdminOverlay/admin/views/orchestrator-editor.html`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-AdminOverlay/admin/views/orchestrator-editor.html).
+- Opslag in `orchestrator-config.json` met velden:
+  - `image_data_url_max_chars`
+  - `image_max_resolution_px`
+
 ## 7) Overlay/Admin
 
 | Variabele | Verplicht |

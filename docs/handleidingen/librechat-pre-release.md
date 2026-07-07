@@ -47,6 +47,43 @@ Relevante bestanden:
 - [`GovChat-NL-LibreChat/n8n-openai-bridge/models.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n-openai-bridge/models.json)
 - [`GovChat-NL-LibreChat/n8n/bootstrap/workflows/orchestrator-litellm.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n/bootstrap/workflows/orchestrator-litellm.json)
 
+## Multimodale image-input en admin-instellingen
+
+De orchestrator ondersteunt image-invoer in chatberichten. Bij binnenkomst van `image_url` data-urls wordt de payload eerst genormaliseerd (resizen/compressie) vóór de vision-aanroep.
+
+Beheer dit via de GovChat overlay admin op:
+
+- `Dashboard` -> `Orchestrator multimodaal` -> `Beheren`
+- Route: `/orchestrator-editor`
+- View: [`GovChat-AdminOverlay/admin/views/orchestrator-editor.html`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-AdminOverlay/admin/views/orchestrator-editor.html)
+
+### Instellingen (admin UI)
+
+- `Max tekens voor image data-url` (`image_data_url_max_chars`)
+  - Doelbudget voor data-url grootte na normalisatie.
+  - Default: `450000`.
+- `Max afbeeldingsresolutie (langste zijde in px)` (`image_max_resolution_px`)
+  - Afbeeldingen boven deze limiet worden proportioneel verkleind.
+  - Default: `1568`.
+
+Config-opslag:
+
+- [`GovChat-AdminOverlay/admin/defaults/orchestrator-config.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-AdminOverlay/admin/defaults/orchestrator-config.json)
+- [`GovChat-NL-LibreChat/overlay/defaults/orchestrator-config.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/overlay/defaults/orchestrator-config.json)
+
+### Runtime flow (normalisatie)
+
+1. Orchestrator detecteert image parts in [`GovChat-NL-LibreChat/n8n/bootstrap/workflows/orchestrator-litellm.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n/bootstrap/workflows/orchestrator-litellm.json).
+2. Workflow leest actuele limieten op `GET /api/config/orchestrator`.
+3. Voor elke data-url doet de workflow `POST /api/config/orchestrator/normalize-image`.
+4. Admin-service normaliseert met `sharp` in [`GovChat-AdminOverlay/admin/server.js`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-AdminOverlay/admin/server.js).
+5. Genormaliseerde image payload gaat door naar de vision-model call.
+
+Belangrijk:
+
+- Deze limieten zijn **geen model max-tokens instellingen**.
+- Het zijn inputlimieten voor afbeeldingspayload (karakterlengte + resolutie).
+
 ### Token/context usage indicator (default uit)
 
 In deze pre-release staat de LibreChat context/token-indicator standaard uit in [`GovChat-NL-LibreChat/librechat.yaml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/librechat.yaml):
@@ -148,7 +185,7 @@ Controleer vervolgens:
 Voor image-generation aanvullend:
 
 - Controleer dat de JS runner built-ins toestaat via [`GovChat-NL-LibreChat/n8n/task-runners.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n/task-runners.json)
-  - `NODE_FUNCTION_ALLOW_BUILTIN=fs,path,crypto`
+  - `NODE_FUNCTION_ALLOW_BUILTIN=fs,path,crypto,http,https,url`
 - Controleer dat `/opt/librechat/images` op de host schrijfbaar is voor runner user (uid/gid `1000`), anders krijg je `EACCES` bij PNG write.
 - Bij base64 image output zet de workflow dit om naar een bestand in `/shared-images` en retourneert markdown `![...](...)`, zodat LibreChat inline kan renderen.
 
