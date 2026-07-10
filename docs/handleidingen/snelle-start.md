@@ -20,6 +20,7 @@ GovChat-NL is een open-source AI-platform voor de overheid, gebaseerd op OpenWeb
 | **AWS-omgeving** | Docker op AWS EC2 | [AWS EC2](deployment/aws-ec2) |
 | **Andere hosting** | Hetzner, DigitalOcean, bare metal | [Generieke VM](deployment/generieke-vm) |
 | **LibreChat (pre-release)** | LibreChat + n8n + n8n-openai-bridge | [LibreChat pre-release](./librechat-pre-release) |
+| **Live transcriptie gebruiken** | Mini-app in de overlay | [Live transcriptie](../apps/live-transcriptie) |
 
 ## Wat heb je nodig?
 

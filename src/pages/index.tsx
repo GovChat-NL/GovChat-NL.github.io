@@ -115,6 +115,12 @@ const FeatureList: FeatureItem[] = [
     link: '/docs/ai-geletterdheid',
   },
   {
+    title: 'Live transcriptie',
+    Icon: IconGrid,
+    description: 'Neem vergaderingen en gesprekken op met live transcriptie, slimme chunking en sessiehistorie per gebruiker.',
+    link: '/docs/apps/live-transcriptie',
+  },
+  {
     title: 'Documentatie',
     Icon: IconDocument,
     description: 'Ontdek de volledige documentatie over architectuur, configuratie, beschikbare apps en handleidingen.',

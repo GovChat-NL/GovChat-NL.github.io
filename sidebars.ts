@@ -60,6 +60,8 @@ const sidebars: SidebarsConfig = {
       label: 'GovChat Overlay',
       items: [
         'apps/overzicht',
+        'apps/versimpelaar',
+        'apps/live-transcriptie',
       ],
     },
     'ai-geletterdheid',
