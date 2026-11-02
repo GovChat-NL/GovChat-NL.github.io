@@ -1,50 +1,10 @@
 ---
-sidebar_position: 1
-title: "Snelle Start"
+title: "Snelle start — verouderde OpenWebUI-handleiding"
+slug: /handleidingen/snelle-start
 ---
 
-# Snelle Start
+# Snelle start — verouderde OpenWebUI-handleiding
 
-GovChat-NL is een open-source AI-platform voor de overheid, gebaseerd op OpenWebUI. Hieronder vind je de snelste route naar een werkende installatie.
+Deze handleiding voor de OpenWebUI-stack is verouderd en wordt niet meer bijgewerkt. Voor een nieuwe installatie volg je de actuele [GovChat-NL LibreChat snelle start](./librechat-pre-release). De oude OpenWebUI repository is beschikbaar als [GovChat-NL-legacy](https://github.com/GovChat-NL/GovChat-NL-legacy).
 
-> Op zoek naar de nieuwe LibreChat-stack met n8n orchestration? Gebruik de pre-release handleiding: [LibreChat pre-release quick start](./librechat-pre-release).
-
-> Krijg je bij LibreChat een `admin-panel` pull-fout met `403 Forbidden` op GHCR? Zie de korte troubleshooting-stappen in [LibreChat pre-release quick start](./librechat-pre-release#troubleshooting-admin-panel-pull-faalt-met-ghcr-403).
-
-## Welke route past bij jou?
-
-| Doel | Route | Handleiding |
-|------|-------|-------------|
-| **Productie-deployment** | Docker Compose op een server | [Deployment Overzicht](deployment/overzicht) |
-| **Azure-omgeving** | Docker op Azure VM | [Azure VM](deployment/azure-vm) |
-| **AWS-omgeving** | Docker op AWS EC2 | [AWS EC2](deployment/aws-ec2) |
-| **Andere hosting** | Hetzner, DigitalOcean, bare metal | [Generieke VM](deployment/generieke-vm) |
-| **LibreChat (pre-release)** | LibreChat + n8n + n8n-openai-bridge | [LibreChat pre-release](./librechat-pre-release) |
-| **Live transcriptie gebruiken** | Mini-app in de overlay | [Live transcriptie](../apps/live-transcriptie) |
-
-## Wat heb je nodig?
-
-| Component | Beschrijving |
-|-----------|-------------|
-| **Server** | Linux VM met minimaal 2 vCPU en 8 GB RAM |
-| **Docker** | Docker Engine + Compose plugin |
-| **LLM-provider** | Azure OpenAI API key (of andere provider) |
-| **Domeinnaam** | Voor HTTPS en SSO |
-| **SSO** | Microsoft Entra ID app-registratie (optioneel maar aanbevolen) |
-
-## Referentie compose-bestanden
-
-De [GovChat-NL repository](https://github.com/GovChat-NL/GovChat-NL) bevat productie-klare compose-bestanden:
-
-| Bestand | Beschrijving |
-|---------|-------------|
-| [`docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/docker-compose.yml) | Basisstack: OpenWebUI + LiteLLM + PostgreSQL + Tika |
-| [`.env.example`](https://github.com/GovChat-NL/GovChat-NL/blob/main/.env.example) | Template met alle omgevingsvariabelen |
-
-## Bestaande implementaties
-
-Bekijk hoe andere organisaties GovChat-NL hebben ingericht:
-
-- [Provincie Limburg (LAICA)](../implementaties/provincie-limburg) — 1.000+ gebruikers op Hetzner/Elestio
-- [Gemeente Meierijstad (GAIMS)](../implementaties/gemeente-meierijstad) — Docker met Azure OpenAI en n8n
-- [Gemeente Nijmegen](../implementaties/gemeente-nijmegen) — AWS Container Services met AWS LLM Modellen
+OpenWebUI-instructies op deze route gelden alleen voor bestaande deployments en vormen geen upgradepad naar LibreChat. Chatdata, accounts, configuratie en vectorstores migreren niet automatisch tussen de front-ends.

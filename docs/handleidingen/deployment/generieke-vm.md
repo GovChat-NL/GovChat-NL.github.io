@@ -5,6 +5,10 @@ title: "Generieke VM"
 
 # Deployment op generieke VM -- wordt aan gewerkt
 
+:::warning Historische handleiding
+Deze instructies zijn geen actuele installatiehandleiding voor de LibreChat-defaultstack. Gebruik het [deployment-overzicht](./overzicht) en valideer je eigen infrastructuur-/proxyconfiguratie.
+:::
+
 Deze handleiding beschrijft het opzetten van GovChat-NL op een willekeurige Linux VM: Hetzner, DigitalOcean, bare metal, of een on-premises server. Dit is dezelfde aanpak die Provincie Limburg gebruikt (via Hetzner/Elestio).
 
 ## Meer informatie

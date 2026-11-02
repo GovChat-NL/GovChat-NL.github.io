@@ -1,265 +1,72 @@
 ---
-sidebar_position: 2
-title: "LibreChat pre-release: snelle start"
+sidebar_position: 1
+title: "Snelle start: GovChat-NL met LibreChat"
 ---
 
-# LibreChat pre-release: snelle start
+# Snelle start: GovChat-NL met LibreChat
 
-:::warning Pre-release
-Deze route is een **pre-release** van GovChat-NL met LibreChat als frontend, n8n orchestration en `n8n-openai-bridge`.
+Deze handleiding start de standaard GovChat-NL-stack. De stuurgroep heeft op 13 oktober 2026 besloten LibreChat de default front-end te maken (quorum 5/8; 5/5 stemmen voor). De oude OpenWebUI-stack is legacy en staat in [GovChat-NL-legacy](https://github.com/GovChat-NL/GovChat-NL-legacy).
 
-Geschikt voor testen, pilot-implementaties en iteratieve doorontwikkeling.
+:::warning Productiegebruik
+Dit is een referentie-implementatie, geen kant-en-klare productiegarantie. Voer vóór productie eigen security-, privacy-, identity-, backup-, herstel- en loadtests uit. Zet secrets nooit in versiebeheer.
 :::
 
-:::warning Status webcrawler (experimenteel)
-De webcrawler / overheidscrawler is op dit moment een **experimentele feature** en nog **ver van af** voor volledige productie-inzet.
+## Wat Compose start
 
-Er zijn wel eerste stappen gezet (beheer in de admin-UI, run-overzichten, historisch inzicht en basis-optimalisaties), maar verdere uitwerking en hardening zijn nog nodig.
-:::
+De standaard `docker-compose.yml` start LibreChat en de overlay-proxy, admin panel, GovChat bridge, MongoDB, Redis, Meilisearch, LiteLLM met PostgreSQL, n8n met PostgreSQL en JavaScript task runner, workflow bootstrap, Qdrant voor de interne OpenBesluitvorming-componenten en de retentie-worker. Aanvullende diensten zoals RAG en beheer zijn via Compose-profielen optioneel.
 
-## Wat je krijgt in deze variant
+De bridge verzorgt de OpenAI-compatibele koppeling tussen LibreChat en de n8n orchestrator. De bridge, LibreChat runtime-overlay en n8n eventpatch werken samen zodat n8n-tools tijdens de streaming chat als native toolkaarten zichtbaar zijn. Zie [Live tool-calling](../architectuur/live-tool-calling).
 
-- `librechat` + `librechat-proxy`
-- `admin-panel` standaard actief
-- `n8n` + `n8n-runners` + `n8n-bootstrap`
-- `n8n-openai-bridge` als OpenAI-compatibele koppel-laag
-- `litellm` + `litellm-postgres`
-- `mongodb`, `redis`, `meilisearch`, `govchat-overlay-admin`
+## Vereisten
 
-Bronstack: [`GovChat-NL-LibreChat/docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/docker-compose.yml)
+- Docker Engine met Compose plugin en voldoende hostcapaciteit voor de geselecteerde diensten.
+- Een ondersteunde modelproviderconfiguratie in LiteLLM en bijbehorende credentials.
+- Een DNS/HTTPS reverse proxy en een bereikbare publieke basis-URL voor een gedeelde installatie.
+- Een sibling-checkout van de GovChat bridge: Compose bouwt standaard `../n8n-openai-bridge-main`.
 
-## Architectuur in het kort
+## Installatie
 
-Standaard chat-flow:
-
-1. LibreChat custom endpoint -> `n8n-openai-bridge` (`/v1`)
-2. Bridge model `govchat-orchestrator` -> n8n webhook `/webhook/orchestrator`
-3. n8n Orchestrator AI Agent verwerkt de **volledige chat history** en streamt response terug
-4. Optioneel toolgebruik naar B1 Versimpelaar workflow
-
-Extra (optioneel):
-
-5. Orchestrator kan ook een image-tool gebruiken via LiteLLM (`/v1/images/generations`)
-
-Relevante bestanden:
-
-- [`GovChat-NL-LibreChat/librechat.yaml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/librechat.yaml)
-- [`GovChat-NL-LibreChat/n8n-openai-bridge/models.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n-openai-bridge/models.json)
-- [`GovChat-NL-LibreChat/n8n/bootstrap/workflows/orchestrator-litellm.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n/bootstrap/workflows/orchestrator-litellm.json)
-
-## Multimodale image-input en admin-instellingen
-
-De orchestrator ondersteunt image-invoer in chatberichten. Bij binnenkomst van `image_url` data-urls wordt de payload eerst genormaliseerd (resizen/compressie) vóór de vision-aanroep.
-
-Beheer dit via de GovChat overlay admin op:
-
-- `Dashboard` -> `Orchestrator multimodaal` -> `Beheren`
-- Route: `/orchestrator-editor`
-- View: [`GovChat-AdminOverlay/admin/views/orchestrator-editor.html`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-AdminOverlay/admin/views/orchestrator-editor.html)
-
-### Instellingen (admin UI)
-
-- `Max tekens voor image data-url` (`image_data_url_max_chars`)
-  - Doelbudget voor data-url grootte na normalisatie.
-  - Default: `450000`.
-- `Max afbeeldingsresolutie (langste zijde in px)` (`image_max_resolution_px`)
-  - Afbeeldingen boven deze limiet worden proportioneel verkleind.
-  - Default: `1568`.
-
-Config-opslag:
-
-- [`GovChat-AdminOverlay/admin/defaults/orchestrator-config.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-AdminOverlay/admin/defaults/orchestrator-config.json)
-- [`GovChat-NL-LibreChat/overlay/defaults/orchestrator-config.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/overlay/defaults/orchestrator-config.json)
-
-### Runtime flow (normalisatie)
-
-1. Orchestrator detecteert image parts in [`GovChat-NL-LibreChat/n8n/bootstrap/workflows/orchestrator-litellm.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n/bootstrap/workflows/orchestrator-litellm.json).
-2. Workflow leest actuele limieten op `GET /api/config/orchestrator`.
-3. Voor elke data-url doet de workflow `POST /api/config/orchestrator/normalize-image`.
-4. Admin-service normaliseert met `sharp` in [`GovChat-AdminOverlay/admin/server.js`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-AdminOverlay/admin/server.js).
-5. Genormaliseerde image payload gaat door naar de vision-model call.
-
-Belangrijk:
-
-- Deze limieten zijn **geen model max-tokens instellingen**.
-- Het zijn inputlimieten voor afbeeldingspayload (karakterlengte + resolutie).
-
-### Token/context usage indicator (default uit)
-
-In deze pre-release staat de LibreChat context/token-indicator standaard uit in [`GovChat-NL-LibreChat/librechat.yaml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/librechat.yaml):
-
-```yaml
-interface:
-  contextUsage: false
-  contextCost: false
-```
-
-Reden: de chatflow loopt via n8n-orchestratie en toolstappen. De UI-indicator kan dan afwijken van de werkelijke end-to-end tokenconsumptie.
-
-## Stap 1 — Voorbereiding
-
-- Docker Engine + Docker Compose plugin
-- Linux VM of dev host met minimaal 2 vCPU / 8 GB RAM
-- Externe modelprovider credentials (bijv. OpenAI/Azure OpenAI via LiteLLM)
-
-## Stap 2 — `.env` maken
-
-1. Ga naar map `GovChat-NL-LibreChat`.
-2. Kopieer [`.env.example`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/.env.example) naar `.env`.
-3. Vul minimaal:
-
-- `PUBLIC_BASE_URL`
-- `ADMIN_PANEL_PUBLIC_URL`
-- `LITELLM_URL`
-- `LITELLM_API_KEY`
-- `OPENAI_API_KEY`
-- `N8N_OPENAI_BRIDGE_BEARER_TOKEN`
-- `N8N_WEBHOOK_TOKEN`
-- `N8N_ENCRYPTION_KEY`
-- `N8N_POSTGRES_PASSWORD`
-- `LITELLM_MASTER_KEY`
-- `LITELLM_SALT_KEY`
-- `LITELLM_POSTGRES_PASSWORD`
-- `MONGO_ROOT_PASS`, `MEILI_MASTER_KEY`, `JWT_SECRET`, `JWT_REFRESH_SECRET`, `SESSION_SECRET`, `CREDS_KEY`, `CREDS_IV`
-
-Voor volledige lijst en uitleg: [LibreChat pre-release omgevingsvariabelen](./librechat-omgevingsvariabelen).
-
-### Optioneel: image generation inschakelen
-
-Zet in [`.env.example`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/.env.example) de image-variabelen:
-
-- `N8N_ENABLE_IMAGE_TOOL=true`
-- `N8N_LITELLM_IMAGE_MODEL` (bijv. `gpt-image-1`)
-- optioneel `N8N_LITELLM_IMAGE_BASE_URL`
-- optioneel `N8N_LITELLM_IMAGE_API_KEY`
-
-Bij `N8N_ENABLE_IMAGE_TOOL=false` blijft de tool beschikbaar, maar geeft deze een nette melding terug dat image-generation is uitgeschakeld (niet-fataal).
-
-## Stap 3 — Start de stack
+Clone de canonical repository, maak een lokale `.env` van de template en vul de secrets en omgevingswaarden in:
 
 ```bash
-docker compose -f docker-compose.yml --env-file .env up -d
+git clone https://github.com/GovChat-NL/GovChat-NL.git
+cd GovChat-NL
+cp .env.example .env
 ```
 
-### Troubleshooting: `admin-panel` pull faalt met GHCR 403
+Genereer unieke, cryptografisch sterke waarden voor databasewachtwoorden, JWT/session/credential-secrets, n8n encryption- en webhook-tokens, bridge bearer token en LiteLLM secrets. Vul publieke URL's, Entra ID settings indien SSO wordt gebruikt, en modelprovidergegevens in. Raadpleeg de volledige [omgevingsvariabelenreferentie](./librechat-omgevingsvariabelen).
 
-Zie je bij opstarten een fout zoals `failed to fetch oauth token ... 403 Forbidden` voor `ghcr.io/clickhouse/librechat-admin-panel`?
-
-Dit wijst vaak op opgeslagen Docker-credentials voor GHCR met onvoldoende package-rechten. Docker probeert dan geauthenticeerd te pullen en GHCR weigert de aanvraag.
-
-Gebruik deze snelle fix:
+Clone de bridge naast de stack-checkout op de branch die de Compose build verwacht:
 
 ```bash
-docker logout ghcr.io
-docker compose -f docker-compose.yml --env-file .env pull admin-panel
-docker compose -f docker-compose.yml --env-file .env up -d
+git clone --depth 1 --branch main https://github.com/GovChat-NL/n8n-openai-bridge.git ../n8n-openai-bridge-main
 ```
 
-Verwachte uitkomst: `admin-panel` wordt daarna normaal gepulld en start mee.
-
-Optioneel met RAG-profiel:
+Controleer de samengestelde configuratie en start de stack:
 
 ```bash
-docker compose -f docker-compose.yml --env-file .env --profile rag up -d
+docker compose --env-file .env config --quiet
+docker compose --env-file .env up -d
+docker compose --env-file .env ps
 ```
 
-Bij wijzigingen aan runner-config of image mounts is het verstandig `n8n` + `n8n-runners` expliciet te recreëren:
+Bij de eerste start importeert `n8n-bootstrap` de beschikbare workflows uit `agents/n8n/workflows/`. Controleer de bootstraplogs en zorg dat vereiste workflowcredentials en secrets beschikbaar zijn.
 
-```bash
-docker compose -f docker-compose.yml --env-file .env up -d --force-recreate n8n n8n-runners
-```
+## Optionele profielen
 
-## Stap 4 — Controleer of alles draait
+- `rag`: optionele document-RAG API en PostgreSQL/pgvector services.
+- `admin`: beheertools zoals pgAdmin.
+- `admin-overlay`: experimentele GovChat Admin Overlay; niet standaard actief.
+Start een profiel bewust, bijvoorbeeld `docker compose --env-file .env --profile rag up -d`. Activeer aanvullende data-ingest- of synchronisatieworkflows pas nadat de organisatie bron, doel en toegangsrechten expliciet heeft ingericht.
 
-```bash
-docker compose -f docker-compose.yml --env-file .env ps
-```
+## Controleren en onderhouden
 
-Controleer vervolgens:
+- Bekijk status en logs: `docker compose --env-file .env ps` en `docker compose --env-file .env logs -f librechat n8n-openai-bridge n8n n8n-bootstrap`.
+- Controleer de bridge `/health` en `/v1/models`, LibreChat via `PUBLIC_BASE_URL`, en SSO callback/proxy-instellingen indien geconfigureerd.
+- Valideer workflowbestanden met `node tests/agents/validate-workflows.js`.
+- Volg de [live tool-callingcontrole](../architectuur/live-tool-calling) voor een echte tool-aanroep in de UI.
+- Lees de stack-README en `docs/` in de hoofdrepository voor retentie, beveiligingsheaders, back-ups en component-specifieke runbooks.
 
-- LibreChat op `${PUBLIC_BASE_URL}`
-- Admin panel op `${ADMIN_PANEL_PUBLIC_URL}`
-- LiteLLM models endpoint op `${LITELLM_URL}/v1/models`
-- Bridge health (`/health`) en models (`/v1/models`)
+## Gegevensmigratie vanuit OpenWebUI
 
-Voor image-generation aanvullend:
-
-- Controleer dat de JS runner built-ins toestaat via [`GovChat-NL-LibreChat/n8n/task-runners.json`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/n8n/task-runners.json)
-  - `NODE_FUNCTION_ALLOW_BUILTIN=fs,path,crypto,http,https,url`
-- Controleer dat `/opt/librechat/images` op de host schrijfbaar is voor runner user (uid/gid `1000`), anders krijg je `EACCES` bij PNG write.
-- Bij base64 image output zet de workflow dit om naar een bestand in `/shared-images` en retourneert markdown `![...](...)`, zodat LibreChat inline kan renderen.
-
-## Stap 5 — Modelbeheer (2 routes)
-
-### Route A (aanbevolen): config-file
-
-- Beheer modellen in [`GovChat-NL-LibreChat/litellm/config.yaml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/litellm/config.yaml)
-- Herstart `litellm`
-- Kies model in n8n `OpenAI Chat Model` node
-- Publish workflow opnieuw
-
-### Route B: LiteLLM UI
-
-- Voeg model toe via LiteLLM UI
-- Selecteer model in n8n workflow
-- Publish workflow opnieuw
-
-## n8n bootstrap (automatisch)
-
-Bij start van de stack doet `n8n-bootstrap` automatisch:
-
-- import van LiteLLM credential (`openAiApi`)
-- import van Orchestrator en Versimpelaar workflows
-- import van optionele image-generator workflow
-- publish van beide workflows
-
-Als image-generation actief is, publish bootstrap ook de image workflow.
-
-Hierdoor is de LibreChat -> bridge -> n8n koppeling direct actief.
-
-## Validatie / regressietest orchestrator
-
-Gebruik de robuuste validatiesuite op [`GovChat-NL-LibreChat/tests/orchestrator/run-validation.js`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/tests/orchestrator/run-validation.js).
-
-### Wat deze suite test
-
-- Tekstvragen (meerdere checks, o.a. eenvoudige kennisvraag en rekenvraag)
-- Multimodale vraag met afbeelding (cijferherkenning)
-- Beide webhook-shapes:
-  - `body.messages` (bridge/wrapped)
-  - `messages` op rootniveau
-
-### Benodigde testafbeelding
-
-Plaats je afbeelding standaard op:
-
-- [`GovChat-NL-LibreChat/tests/fixtures/number-grid.png`](https://github.com/GovChat-NL/GovChat-NL/blob/main/GovChat-NL-LibreChat/tests/fixtures/number-grid.png)
-
-Of geef een eigen pad mee met `--image`.
-
-### Uitvoeren
-
-```bash
-node GovChat-NL-LibreChat/tests/orchestrator/run-validation.js --expect 7
-```
-
-Optioneel met expliciet pad:
-
-```bash
-node GovChat-NL-LibreChat/tests/orchestrator/run-validation.js --image ./mijn-test.png --expect 7
-```
-
-Alleen teksttests draaien:
-
-```bash
-node GovChat-NL-LibreChat/tests/orchestrator/run-validation.js --only-text
-```
-
-### Exit-codes
-
-- `0` = alle tests geslaagd
-- `1` = functionele testfout (regressie)
-- `2` = geblokkeerd door omgeving/configuratie (bijv. geen bruikbaar taalmodel/provider geconfigureerd)
-
-Bij code `2` geeft de suite expliciet aan dat de validatie niet betrouwbaar kan worden uitgevoerd door ontbrekende of onjuiste model/provider-configuratie.
-
+Het wisselen van front-end/stack importeert geen OpenWebUI-chats, gebruikers, instellingen, modellen of vector-data automatisch naar LibreChat. Behandel migratie als apart traject met inventarisatie, mapping, toestemming, back-up, testrestore en gebruikerscommunicatie. Bewaar de legacy stack totdat de organisatie de migratie heeft geaccepteerd.

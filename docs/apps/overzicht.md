@@ -5,7 +5,7 @@ title: "GovChat Overlay"
 
 # GovChat Overlay
 
-De **GovChat Overlay** is een aanvullende laag bovenop OpenWebUI die overheidsspecifieke functionaliteit toevoegt zonder de basis-applicatie aan te passen. De overlay wordt als apart Docker-image meegeleverd en injecteert via een gedeeld volume extra functionaliteit in OpenWebUI.
+GovChat-specifieke UI-functionaliteit wordt als overlay gekoppeld aan de LibreChat-stack via de proxy en read-only runtime-assets. De aparte GovChat Admin Overlay-service is optioneel/WIP en staat standaard uit; deze documentatie beschrijft geen OpenWebUI plugin. De oude OpenWebUI-overlay behoort tot de [legacy stack](https://github.com/GovChat-NL/GovChat-NL-legacy).
 
 ## Wat zit er in?
 
@@ -104,4 +104,4 @@ Voor automatische import/publicatie zijn `transcriptie-litellm.json` én `transc
 
 ## Roadmap
 
-Verdere uitbreidingen van de overlay (waaronder de B1 Versimpelaar) zijn te volgen op de [GovChat-NL roadmap](https://www.govchat-nl.nl/roadmap/).
+De actuele bron en Compose-configuratie staan in de [GovChat-NL hoofdrepository](https://github.com/GovChat-NL/GovChat-NL). De standaard chatroute en live toolkaarten worden beschreven bij [LibreChat-architectuur](../architectuur/librechat) en [live tool-calling](../architectuur/live-tool-calling).

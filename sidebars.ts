@@ -18,32 +18,38 @@ const sidebars: SidebarsConfig = {
       label: 'Architectuur',
       items: [
         'architectuur/componenten',
-        'architectuur/infrastructuur',
         'architectuur/librechat',
+        'architectuur/live-tool-calling',
         'architectuur/n8n',
         'architectuur/qdrant',
         'architectuur/litellm',
+        'architectuur/infrastructuur',
       ],
     },
     {
       type: 'category',
       label: 'Handleidingen',
       items: [
-        'handleidingen/snelle-start',
         'handleidingen/librechat-pre-release',
         'handleidingen/librechat-omgevingsvariabelen',
         {
           type: 'category',
-          label: 'Deployment',
+          label: 'Deployment (LibreChat)',
           items: [
             'handleidingen/deployment/overzicht',
-            'handleidingen/deployment/azure-vm',
-            'handleidingen/deployment/aws-ec2',
-            'handleidingen/deployment/generieke-vm',
           ],
         },
         'handleidingen/sso-configuratie',
-        'handleidingen/omgevingsvariabelen',
+        {
+          type: 'category',
+          label: 'Historische OpenWebUI-deploymentvoorbeelden',
+          items: [
+            'handleidingen/deployment/azure-vm',
+            'handleidingen/deployment/aws-ec2',
+            'handleidingen/deployment/generieke-vm',
+            'handleidingen/omgevingsvariabelen',
+          ],
+        },
       ],
     },
     {

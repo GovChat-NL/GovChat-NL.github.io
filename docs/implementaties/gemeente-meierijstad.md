@@ -5,6 +5,10 @@ title: "Gemeente Meierijstad (GAIMS)"
 
 # Gemeente Meierijstad (GAIMS)
 
+:::note Historisch voorbeeld
+Dit is een historisch implementatievoorbeeld van een OpenWebUI-gebaseerde stack, niet de huidige LibreChat-default. De bestanden en configuraties waarnaar hieronder wordt verwezen zijn legacy-materiaal.
+:::
+
 Gemeente Meierijstad was één van de eerste gemeenten die GovChat-NL in productie nam. Onder de naam **GAIMS** (Generatieve AI Meierijstad) draait de omgeving volledig intern, op eigen infrastructuur, met Microsoft Entra ID als toegangspoort. Deze pagina beschrijft hoe de omgeving is opgebouwd, welke keuzes zijn gemaakt en waarom, zodat andere gemeenten er direct van kunnen leren.
 
 :::tip
@@ -54,8 +58,8 @@ De `govchat-admin` container injecteert via een gedeeld volume (`/govchat-static
 
 Compose- en voorbeeldbestanden:
 
-- [`gaims_openwebui_docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/gaims_openwebui_docker-compose.yml)
-- [`gaims_openwebui_example.env`](https://github.com/GovChat-NL/GovChat-NL/blob/main/gaims_openwebui_example.env)
+- [`gaims_openwebui_docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL-legacy/blob/main/gaims_openwebui_docker-compose.yml)
+- [`gaims_openwebui_example.env`](https://github.com/GovChat-NL/GovChat-NL-legacy/blob/main/gaims_openwebui_example.env)
 
 ### Stack 2: LiteLLM
 
@@ -68,8 +72,8 @@ LiteLLM fungeert als proxy tussen OpenWebUI en de Azure OpenAI-modellen. Door Li
 
 Compose- en voorbeeldbestanden:
 
-- [`gaims_litellm_docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/gaims_litellm_docker-compose.yml)
-- [`gaims_litellm_example.env`](https://github.com/GovChat-NL/GovChat-NL/blob/main/gaims_litellm_example.env)
+- [`gaims_litellm_docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL-legacy/blob/main/gaims_litellm_docker-compose.yml)
+- [`gaims_litellm_example.env`](https://github.com/GovChat-NL/GovChat-NL-legacy/blob/main/gaims_litellm_example.env)
 
 ### Stack 3: n8n (workflowautomatisering)
 

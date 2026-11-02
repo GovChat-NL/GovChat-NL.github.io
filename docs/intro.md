@@ -5,27 +5,26 @@ slug: /intro
 
 # Welkom bij GovChat-NL
 
-**GovChat-NL** is een open-source platform voor en door Nederlandse overheidsorganisaties dat ondersteunt bij het implementeren en beheren van AI-oplossingen. Het platform stelt organisaties in staat om zowel chatbots als andere AI-toepassingen laagdrempelig in te zetten.
+**GovChat-NL** is een open-source AI-platform voor Nederlandse overheden. De standaardstack gebruikt **LibreChat** als webinterface, **n8n** voor workflow- en agentorkestratie en een OpenAI-compatibele GovChat-bridge voor streaming en live tool-calling. Docker Compose verbindt de onderdelen en importeert de meegeleverde workflows.
+
+:::important Stuurgroepbesluit
+Op **13 oktober 2026** is besloten LibreChat de standaard GovChat-NL-stack te maken. Het quorum was 5 van de 8 leden; de motie is aangenomen met 5 van de 5 uitgebrachte stemmen. De voormalige OpenWebUI-implementatie is legacy en staat in [de legacy-repository](https://github.com/GovChat-NL/GovChat-NL-legacy).
+:::
 
 ## Waarom GovChat-NL?
 
-- **Sectorspecifieke AI-oplossingen** — Direct inzetbare tools, afgestemd op overheidstaken
-- **AI-geletterdheid** — Ingebouwde handleiding conform de AI-verordening (vanaf februari 2025)
-- **Bewezen in de praktijk** — Ingezet bij diverse organisaties
-- **Geavanceerd toegangsbeheer** — RBAC per agent, per gebruikersgroep
-- **Centraal beheer, lokale flexibiliteit** — Flexibele architectuur met organisatie-specifieke aanpasmogelijkheden
-- **LLM-provider vrij** — Ondersteuning voor Azure OpenAI, Ollama en meer
-- **Digitaal autonoom** — Volledig in eigen beheer, vrij van de afhankelijkheid van big tech
-
-## Contact
-
-Interesse of vragen? Neem contact op via [ai@prvlimburg.nl](mailto:ai@prvlimburg.nl) of bezoek [govchat-nl.nl](https://www.govchat-nl.nl).
+- **LibreChat als standaardinterface** — gesprekken, modellen, bestanden en agents vanuit één front-end
+- **Workflow-orkestratie met n8n** — Compose importeert GovChat-workflows bij het opstarten
+- **Live tool-calling** — n8n-toolstarts, voortgang en resultaten verschijnen als native LibreChat-toolkaarten
+- **Providerkeuze** — LiteLLM biedt een OpenAI-compatibele gateway naar geconfigureerde modelproviders
+- **Zelf te beheren** — componenten, configuratie en gegevens zijn inzichtelijk en deploybaar met Docker Compose
+- **Overheidsgerichte ontwikkeling** — gedeelde basis om samen met overheden door te ontwikkelen
 
 ## Aan de slag
 
-- [Wat is GovChat-NL?](visie/wat-is-govchat-nl) — Visie, kernwaarden en architectuuroverzicht
-- [Snelle Start](handleidingen/snelle-start) — In 5 stappen aan de slag met Docker
-- [Live transcriptie](apps/live-transcriptie) — Van audio naar tekst met sessiehistorie en beheer
-- [Implementaties](implementaties/provincie-limburg) — Voorbeelden uit de praktijk
-
-Voor de experimentele LibreChat-route, zie [LibreChat pre-release quick start](handleidingen/librechat-pre-release).
+- [Architectuur en componenten](architectuur/librechat) — services, gegevensstromen en grenzen
+- [Snelle start](handleidingen/librechat-pre-release) — start de standaard Compose-stack
+- [Omgevingsvariabelen](handleidingen/librechat-omgevingsvariabelen) — configuratiereferentie
+- [Live tool-calling](architectuur/live-tool-calling) — bridge-events als native LibreChat-toolkaarten
+- [Beveiliging en deployment](handleidingen/deployment/overzicht) — productieoverwegingen en beheer
+- [GitHub-broncode](https://github.com/GovChat-NL/GovChat-NL) — huidige hoofdrepository

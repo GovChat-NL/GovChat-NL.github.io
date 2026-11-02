@@ -108,8 +108,8 @@ Fallback-gedrag:
 
 De bootstrap-workflow staat in:
 
-- `GovChat-NL-LibreChat/n8n/bootstrap/workflows/transcriptie-litellm.json`
-- `GovChat-NL-LibreChat/n8n/bootstrap/workflows/transcriptie-title-litellm.json`
+- `agents/n8n/workflows/transcriptie-litellm.json`
+- `agents/n8n/workflows/transcriptie-title-litellm.json`
 
 Opbouw:
 
@@ -166,7 +166,7 @@ De workflow gebruikt native n8n nodes voor deze route, zonder Code-node afhankel
 
 De functionele validatie kan worden uitgevoerd met:
 
-- `GovChat-NL-LibreChat/tests/transcript/run-validation.js`
+- `tests/transcript/run-validation.js`
 
 Pass-criteria:
 

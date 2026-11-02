@@ -90,7 +90,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          to: '/docs/handleidingen/snelle-start',
+          to: '/docs/handleidingen/librechat-pre-release',
           label: 'Handleidingen',
           position: 'left',
         },
@@ -103,11 +103,6 @@ const config: Config = {
           to: '/docs/ai-geletterdheid',
           label: 'AI-geletterdheid',
           position: 'left',
-        },
-        {
-          href: 'https://www.govchat-nl.nl/',
-          label: 'Website',
-          position: 'right',
         },
         {
           href: 'https://github.com/GovChat-NL/GovChat-NL/discussions',
@@ -134,7 +129,7 @@ const config: Config = {
             },
             {
               label: 'Snelle Start',
-              to: '/docs/handleidingen/snelle-start',
+              to: '/docs/handleidingen/librechat-pre-release',
             },
             {
               label: 'Architectuur',
@@ -146,16 +141,12 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'Website',
-              href: 'https://www.govchat-nl.nl',
-            },
-            {
               label: 'Discussions',
               href: 'https://github.com/GovChat-NL/GovChat-NL/discussions',
             },
             {
               label: 'Roadmap',
-              href: 'https://www.govchat-nl.nl/roadmap/',
+              to: '/docs/visie/roadmap',
             },
           ],
         },

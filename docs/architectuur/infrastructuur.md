@@ -7,12 +7,13 @@ title: "Infrastructuur"
 
 ## Deployment opties
 
-Bij het implementeren van GovChat-NL zijn er twee hoofdkeuzes:
+De canonical stack wordt als Docker Compose-project beheerd. Dezelfde Compose-configuratie kan draaien op een organisatiebeheerde Linux-host, VM of geschikte containeromgeving; netwerk-, identity- en storage-integratie blijven omgevingsspecifiek.
 
-| Keuze | Optie A | Optie B |
-|-------|---------|---------|
-| **Installatie** | Docker image (aanbevolen) | Broncode |
-| **Hosting** | Cloud hosting | Lokale servers |
+| Aspect | Referentie-inrichting |
+|-------|-------------------------|
+| **Installatie** | Docker Engine en Compose plugin |
+| **Hosting** | Linux VM of organisatiebeheerde infrastructuur |
+| **State** | Persistente Compose volumes/host directories met eigen backupbeleid |
 
 :::tip
 Voor productie-omgevingen raden we **Docker** aan. Dit vereenvoudigt installatie, updates en beheer. Zie de [Deployment handleidingen](../handleidingen/deployment/overzicht) voor stapsgewijze instructies.
@@ -22,30 +23,38 @@ Voor productie-omgevingen raden we **Docker** aan. Dit vereenvoudigt installatie
 
 De standaard GovChat-NL stack bestaat uit verschillende containers:
 
-![Docker Compose Stack](../img/diagrams/infra-docker.png)
+```mermaid
+flowchart LR
+  User[Gebruiker] --> LC[LibreChat]
+  LC --> Bridge[GovChat bridge]
+  Bridge --> N8N[n8n + task runner]
+  N8N --> LiteLLM[LiteLLM]
+  LiteLLM --> Models[Modelproviders]
+  LC --> Stores[MongoDB / Redis / Meilisearch]
+  N8N --> Data[n8n PostgreSQL / Qdrant]
+```
 
 | Container | Image | Functie |
 |-----------|-------|---------|
-| **open-webui** | `ghcr.io/open-webui/open-webui` | Web-interface en backend |
-| **litellm** | `ghcr.io/berriai/litellm` | LLM router/adapter |
-| **tika** | `apache/tika` | Documentverwerking |
-| **postgres** | `postgres` | Database |
-| **qdrant** | `qdrant/qdrant` | Vector database voor RAG  |
-| **overlay** | *(wordt aangevuld)* | *(wordt aangevuld)* |
-| **n8n** | *(wordt aangevuld)* | *(wordt aangevuld)* |
+| **librechat** | LibreChat image | Standaard web-interface |
+| **librechat-proxy** | Nginx | Overlay-injectie/proxylaag |
+| **n8n-openai-bridge** | Lokale GovChat bridge build | OpenAI-compatibele chat- en tool-eventkoppeling |
+| **n8n + n8n-runners** | n8n image en JavaScript runner | Workflows en agents |
+| **litellm** | LiteLLM image | Modelgateway |
+| **mongodb / redis / meilisearch** | Officiële service-images | LibreChat state, sessies/cache en zoekindex |
+| **postgres / qdrant** | Database/vector images | n8n/LiteLLM data en interne OpenBesluitvorming-vectoren |
 
 ## Authenticatie
 
 GovChat-NL ondersteunt meerdere authenticatiemethoden:
 
-- **Microsoft Entra ID** (voorheen Azure AD) — SSO via OAuth/OIDC
-- **Lokale authenticatie** — Gebruikersnaam en wachtwoord
-- **OIDC-compatibele providers** — Elke OpenID Connect provider
+- **Microsoft Entra ID** — de referentieconfiguratie gebruikt OIDC/Entra; callback, app roles en Graph permissions moeten per tenant worden ingesteld
+- **LibreChat loginopties** — bepaal lokale/social login en registratiebeleid expliciet via de stackconfiguratie
 
 ## Netwerk en beveiliging
 
-- De applicatie draait standaard op poort **8080**
-- LiteLLM is alleen intern bereikbaar (niet blootgesteld aan het internet)
+- LibreChat gebruikt intern poort **3080**; publicatie/hostpoort volgt `LC_PORT` en de reverse proxy
+- De bridge, databases, n8n-beheerinterface en LiteLLM horen intern te blijven tenzij een expliciete beheerroute is beveiligd
 - Alle communicatie met LLM-providers verloopt via HTTPS
 - Database is alleen intern bereikbaar
 
@@ -54,9 +63,9 @@ GovChat-NL ondersteunt meerdere authenticatiemethoden:
 Stapsgewijze handleidingen per infrastructuur-type:
 
 - [Deployment Overzicht](../handleidingen/deployment/overzicht) — Referentie compose-bestanden en gemeenschappelijke stappen
-- [Azure VM](../handleidingen/deployment/azure-vm) — Deployment op een Azure Virtual Machine
-- [AWS EC2](../handleidingen/deployment/aws-ec2) — Deployment op een AWS EC2-instance
-- [Generieke VM](../handleidingen/deployment/generieke-vm) — Hetzner, DigitalOcean, bare metal of on-premises
+- [Azure VM](../handleidingen/deployment/azure-vm) — historisch OpenWebUI-voorbeeld, niet de actuele Compose-installatie
+- [AWS EC2](../handleidingen/deployment/aws-ec2) — historisch deploymentvoorbeeld
+- [Generieke VM](../handleidingen/deployment/generieke-vm) — historische deploymentnotities
 
 ## Voorbeeldimplementaties
 

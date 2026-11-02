@@ -67,14 +67,16 @@ Qdrant draait als container binnen de GovChat-NL stack. De volledige service-con
 
 ### Collecties
 
-Qdrant organiseert vectoren in **collecties**. OpenWebUI maakt automatisch collecties aan wanneer documenten worden geüpload. Elke collectie heeft:
+Qdrant organiseert vectoren in **collecties**. In de huidige GovChat-NL Compose-stack is Qdrant intern bedoeld voor OpenBesluitvorming-workflows; LibreChat-bestandsuploads maken niet automatisch Qdrant-collecties aan. Elke collectie heeft:
 
 - **Vector dimensie** — Afhankelijk van het gebruikte embedding model (bijv. 1536 voor OpenAI `text-embedding-3-small`)
 - **Distance metric** — Standaard cosine similarity
 
-### Koppeling met OpenWebUI
+### Huidige GovChat-NL-gebruik
 
-Configureer de Qdrant-verbinding in OpenWebUI via omgevingsvariabelen:
+De OpenBesluitvorming-workflows gebruiken de interne Qdrant service/collectieconfiguratie. Configureer de bron, collectie en workflowcredentials expliciet voordat ingest- of sync-workflows worden geactiveerd. Raadpleeg de actuele [`docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/docker-compose.yml) en OpenBesluitvorming-documentatie in de hoofdrepository. Oudere OpenWebUI/Qdrant-configuratie is alleen van toepassing op legacy deployments.
+
+Meer informatie over het upstream-project en de publieke dienst: [OpenBesluitvorming op GitHub](https://github.com/ontola/openbesluitvorming) en [openbesluitvorming.nl](https://openbesluitvorming.nl/).
 
 ```bash
 VECTOR_DB=qdrant

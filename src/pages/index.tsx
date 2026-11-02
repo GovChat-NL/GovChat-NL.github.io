@@ -93,8 +93,8 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Flexibele Architectuur',
     Icon: IconBlocks,
-    description: 'Gebouwd op OpenWebUI, LiteLLM en n8n. Kies je eigen LLM-provider en breid uit met eigen agents.',
-    link: '/docs/architectuur/componenten',
+    description: 'LibreChat als front-end, n8n voor agents en workflows, met LiteLLM voor providerkeuze en live tool-calling via de GovChat-bridge.',
+    link: '/docs/architectuur/librechat',
   },
   {
     title: 'Digitaal Autonoom',
@@ -129,8 +129,8 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Snelle Start',
     Icon: IconGrid,
-    description: 'Centrale hub voor AI-toepassingen met RBAC per agent en per gebruikersgroep. Direct inzetbare tools voor overheidstaken.',
-    link: '/docs/handleidingen/snelle-start',
+    description: 'Start de standaard LibreChat-stack met Docker Compose en automatisch geïmporteerde n8n-workflows.',
+    link: '/docs/handleidingen/librechat-pre-release',
   },
 ];
 
@@ -340,8 +340,8 @@ function LegoConceptSection() {
       alt: 'LEGO bouwstappen — modulair platform',
       title: 'Stap voor stap bouwen',
       description:
-        'Begin klein en bouw uit. Met duidelijke handleidingen kun je stap voor stap je eigen platform opzetten.',
-      link: '/docs/handleidingen/snelle-start',
+        'Begin met de gedeelde LibreChat-stack; breid uit met organisatie-eigen modellen, agents en workflows.',
+      link: '/docs/handleidingen/librechat-pre-release',
       linkText: 'Bekijk de handleidingen \u2192',
     },
   ];

@@ -16,7 +16,7 @@ body:
         - architectuur/n8n
         - architectuur/qdrant
         - architectuur/litellm
-        - handleidingen/snelle-start
+        - handleidingen/librechat-pre-release
         - handleidingen/developer-modus
         - handleidingen/sso-configuratie
         - handleidingen/omgevingsvariabelen

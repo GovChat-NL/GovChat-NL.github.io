@@ -7,6 +7,10 @@ title: "Omgevingsvariabelen"
 
 GovChat-NL biedt diverse omgevingsvariabelen om het platform aan te passen aan je organisatie. Hieronder staan de GovChat-NL-specifieke variabelen.
 
+:::warning Verouderde OpenWebUI-configuratie
+Deze lijst hoort bij de legacy OpenWebUI-deployment, niet bij de huidige LibreChat-stack. Gebruik voor nieuwe deployments de [LibreChat-omgevingsvariabelenreferentie](./librechat-omgevingsvariabelen). Legacy broncode en configuratie staan in [GovChat-NL-legacy](https://github.com/GovChat-NL/GovChat-NL-legacy).
+:::
+
 ## Welkomstberichten & UI
 
 | Variabele | Standaard | Beschrijving |

@@ -108,8 +108,10 @@ De broncode en documentatie van GovChat-NL worden beheerd via de GitHub-organisa
 
 | Repository | Inhoud |
 |-----------|--------|
-| [GovChat-NL](https://github.com/GovChat-NL/GovChat-NL) | Hoofdrepository met de applicatiecode |
+| [GovChat-NL](https://github.com/GovChat-NL/GovChat-NL) | Canonical hoofdrepository met de LibreChat-defaultstack |
 | [GovChat-NL.github.io](https://github.com/GovChat-NL/GovChat-NL.github.io) | Deze documentatiesite |
+| [GovChat-NL-legacy](https://github.com/GovChat-NL/GovChat-NL-legacy) | Voormalige OpenWebUI-stack; uitsluitend legacy/historisch |
+| [n8n-openai-bridge](https://github.com/GovChat-NL/n8n-openai-bridge) | OpenAI-compatibele bridge en live tool-eventproducer |
 
 ### Bijdragen via GitHub
 

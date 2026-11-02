@@ -44,6 +44,6 @@ Dit betekent:
 
 De volgende zaken vallen nadrukkelijk **buiten** de GovChat-NL licenties:
 
-- **Onderliggende basissoftware** — OpenWebUI, LiteLLM, n8n, Qdrant etc. hebben elk hun eigen licentie
+- **Onderliggende basissoftware** — LibreChat, LiteLLM, n8n, Qdrant en overige componenten hebben elk hun eigen licentie; OpenWebUI hoort bij de legacy stack
 - **Lokale data** — Organisatie-eigen data, documenten en configuratie
 - **Lokale implementaties** — De specifieke inrichting bij individuele organisaties

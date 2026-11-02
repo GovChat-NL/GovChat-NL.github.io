@@ -5,6 +5,10 @@ title: "Provincie Limburg (LAICA)"
 
 # Provincie Limburg (LAICA)
 
+:::note Historisch voorbeeld
+Dit is een historisch voorbeeld van de eerdere OpenWebUI-deployment. Het beschrijft niet de huidige LibreChat-defaultstack. Zie [de huidige deploymenthandleiding](../handleidingen/deployment/overzicht) voor nieuwe installaties.
+:::
+
 Provincie Limburg was de eerste organisatie die GovChat-NL in productie nam, onder de naam **LAICA**. Met 1.000+ actieve gebruikers is dit de grootste implementatie.
 
 ## Overzicht
@@ -28,10 +32,10 @@ De productie-omgeving draait als Docker Compose stack met vier containers:
 
 ## Docker Compose
 
-De volledige Docker Compose configuratie en environment template staan in de private repository:
+De historische Docker Compose configuratie en environment template zijn onderdeel van de [legacy-repository](https://github.com/GovChat-NL/GovChat-NL-legacy):
 
-- [`docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/docker-compose.yml)
-- [`.env.example`](https://github.com/GovChat-NL/GovChat-NL/blob/main/.env.example)
+- [`docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL-legacy/blob/main/docker-compose.yml)
+- [`.env.example`](https://github.com/GovChat-NL/GovChat-NL-legacy/blob/main/.env.example)
 
 :::info
 Vervang alle `${...}` variabelen door je eigen waarden. Bewaar gevoelige gegevens in een `.env` bestand dat niet in versiebeheer staat.

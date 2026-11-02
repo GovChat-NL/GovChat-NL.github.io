@@ -18,7 +18,7 @@ Veel AI-toepassingen binnen de overheid vereisen meerdere stappen: een document 
 
 ## Rol binnen GovChat-NL
 
-GovChat-NL apps kunnen n8n workflows aanroepen om complexe, meerstaps-processen uit te voeren. De koppeling tussen OpenWebUI en n8n verloopt via een **function** in OpenWebUI.
+De standaard chatflow roept n8n aan via de OpenAI-compatibele GovChat-bridge. De orchestrator kan tijdens het genereren tools in n8n uitvoeren; de bridge en LibreChat runtime-overlay tonen de lifecycle als live native toolkaarten. Zie [Live tool-calling](./live-tool-calling).
 
 ![Voorbeeld van een n8n workflow](../img/n8n-voorbeeld-flow.png)
 *Voorbeeld n8n flow met Meierijstad-specifieke tools, zoals website Meierijstad, medewerkers en afdelingen, schrijfwijze Meierijstad en P&O-gerelateerde informatie.*
@@ -27,7 +27,7 @@ GovChat-NL apps kunnen n8n workflows aanroepen om complexe, meerstaps-processen 
 
 ### Docker
 
-n8n draait als aparte container naast de GovChat-NL stack. Zie de [Gemeente Meierijstad](../implementaties/gemeente-meierijstad) implementatie voor een voorbeeld van een n8n-stack met queue-architectuur (PostgreSQL, Redis, RabbitMQ).
+n8n draait als service in de standaard Compose-stack met eigen PostgreSQL en een externe JavaScript task runner. Een eenmalige bootstrap-service importeert de JSON-workflows uit `agents/n8n/workflows/`; valideer deze bronbestanden met `node tests/agents/validate-workflows.js`. Modelnodes gebruiken LiteLLM; routeer ze niet terug naar de GovChat-bridge.
 
 ## Meer informatie
 

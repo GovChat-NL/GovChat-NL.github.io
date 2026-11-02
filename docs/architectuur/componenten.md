@@ -5,33 +5,30 @@ title: "Componenten & Stack"
 
 # Componenten & Stack
 
-GovChat-NL is opgebouwd uit meerdere open-source componenten die samen een complete AI-oplossing vormen.
+GovChat-NL is opgebouwd uit open-source componenten die samen de LibreChat-defaultstack vormen. De volledige service- en request-flow staat in [LibreChat-architectuur](./librechat).
 
-![Architectuuroverzicht](../img/diagrams/componenten.png)
+## LibreChat — standaard front-end
 
-## OpenWebUI
+LibreChat is de webinterface en gesprekstoepassing. De standaardstack koppelt LibreChat aan de GovChat-bridge en beheert configuratie via `librechat.yaml`:
 
-De web-interface en backend van GovChat-NL. Biedt:
+- **Chat en streaming** — conversaties en modelresponsen via de custom endpointconfiguratie
+- **Agent-ervaring** — n8n tool-aanroepen als native live toolkaarten
+- **Bestanden en multimodale input** — onderhevig aan model- en deploymentinstellingen
+- **Gebruikerslogin** — LibreChat ondersteunt de geconfigureerde login-/SSO-providers
 
-- **Chat-functionaliteit** — Vergelijkbaar met ChatGPT, met ondersteuning voor meerdere modellen
-- **Gebruikersbeheer** — Rollen, groepen en RBAC
-- **App Launcher** — Centrale hub voor AI-toepassingen
-- **Knowledge Base** — Upload en raadpleeg documenten
+## n8n-openai-bridge
 
-## LibreChat (pre-release)
+De aparte GovChat-service vormt de OpenAI-compatibele verbinding tussen LibreChat en n8n:
 
-Alternatieve frontend/backendlijn die momenteel als pre-release wordt onderzocht:
+- **Chat Completions API** op `/v1` voor de LibreChat custom endpoint
+- **n8n-webhookrouting** voor orchestrator/workflows
+- **Tool lifecycle sideband** die native live-kaarten mogelijk maakt
 
-- **Custom endpoint integratie** — Koppeling naar `n8n-openai-bridge`
-- **Streaming chat-afhandeling** — Realtime responsrichting via bridge + n8n
-- **n8n orchestration als default route** — Standaardchat kan via orchestrator-workflow lopen
-- **Governed model routing** — Via LiteLLM + workflowselectie
-
-Meer details: [LibreChat architectuur (pre-release)](./librechat) en [LibreChat quick start](../handleidingen/librechat-pre-release)
+De eventflow en benodigde runtime-patches staan in [Live tool-calling](./live-tool-calling). Bridgebroncode: [GovChat-NL/n8n-openai-bridge](https://github.com/GovChat-NL/n8n-openai-bridge).
 
 ## LiteLLM
 
-Fungeert als router en adapter tussen de applicatie en AI-modellen:
+Fungeert als providerrouter voor LibreChat en de AI-nodes in n8n:
 
 - **Multi-provider** — Gebruik meerdere vendors en modellen naast elkaar (Azure, Google, Ollama, etc.)
 - **Load balancing** — Verdeel verkeer over meerdere endpoints
@@ -47,31 +44,30 @@ Workflow automation platform voor het bouwen van complexe AI-workflows:
 - Integratie met externe systemen
 - Mogelijkheid tot het bouwen en combineren van agents
 
-## Apache Tika
-
-Document processing voor het verwerken van uploads:
-
-- PDF, Word, Excel, PowerPoint
-- Tekst extractie voor RAG (Retrieval Augmented Generation)
-
 ## Qdrant
 
-Vector database voor Retrieval Augmented Generation (RAG) en kennisbank-functionaliteit:
+Interne vector database voor de OpenBesluitvorming-workflows. Qdrant wordt niet door de standaard LibreChat upload/RAG-configuratie als algemene kennisbank gebruikt:
 
 - **Vector opslag** — Opslaan van embeddings voor documenten en kennisbronnen
 - **Semantisch zoeken** — Zoek relevante context op basis van betekenis, niet alleen trefwoorden
 - **RAG pipeline** — Voorziet het taalmodel van relevante context uit organisatie-documenten
 
-## PostgreSQL
+## Databases en state
 
-Database voor alle persistente data:
+De stack gebruikt gescheiden stores per component in plaats van één centrale database:
 
-- Gebruikers en authenticatie
-- Chatgeschiedenis
-- Configuratie en instellingen
-- Knowledge base metadata
+- MongoDB voor LibreChat-applicatiedata
+- PostgreSQL voor n8n en LiteLLM (afzonderlijke services/instances)
+- Redis voor LibreChat sessies/cache
+- Meilisearch voor LibreChat zoekindex
+- Qdrant voor interne OpenBesluitvorming-vectoren
+
+## OpenWebUI — legacy
+
+OpenWebUI was de webinterface van de oudere GovChat-deployments. Die stack is niet meer de default. Bestaande configuraties en historische deploymentvoorbeelden zijn gelabeld in de [legacy-repository](https://github.com/GovChat-NL/GovChat-NL-legacy); gegevens en accounts migreren niet automatisch naar LibreChat.
 
 ## Zie ook
 
-- [Infrastructuur](./infrastructuur) — Docker stack en deployment-keuzes
-- [LibreChat architectuur (pre-release)](./librechat) — Componenten en datastromen van de LibreChat-route
+- [LibreChat-architectuur](./librechat) — services, data- en requeststromen
+- [Live tool-calling](./live-tool-calling) — bridge/n8n tool lifecycle in de frontend
+- [Deployment](../handleidingen/librechat-pre-release) — Compose-installatie

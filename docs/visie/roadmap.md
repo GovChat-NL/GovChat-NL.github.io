@@ -7,29 +7,13 @@ title: "Roadmap"
 
 GovChat-NL wordt actief doorontwikkeld door een groeiende community van overheidsorganisaties en ontwikkelaars.
 
-## Actuele roadmap
+## Huidige richting
 
-De meest actuele roadmap is te vinden op de website: **[govchat-nl.nl/roadmap](https://www.govchat-nl.nl/roadmap/)**
+De stuurgroep heeft op **13 oktober 2026** besloten LibreChat de standaard GovChat-NL-front-end te maken. Het quorum was 5 van de 8 leden en alle vijf uitgebrachte stemmen steunden de overstap. De voormalige OpenWebUI-stack blijft als [legacy-repository](https://github.com/GovChat-NL/GovChat-NL-legacy) beschikbaar voor bestaande installaties en historische context.
 
-## Onderzoekslijn: LibreChat-variant (pre-release)
+De gedeelde Compose-basis richt zich op het vereenvoudigen van deployment, interne serviceverbindingen en automatische import van n8n-workflows. Een belangrijk ontwikkelthema is live tool-calling: de bridge vertaalt n8n-tool lifecycle-events naar LibreChat's native toolkaarten. Zie [architectuur](../architectuur/librechat), [live tool-calling](../architectuur/live-tool-calling) en de [snelle start](../handleidingen/librechat-pre-release).
 
-Binnen GovChat-NL onderzoeken we actief een LibreChat-gebaseerde variant naast de bestaande OpenWebUI-route.
-
-Focuspunten in dit onderzoek:
-
-- n8n orchestration als standaard afhandelingslaag
-- `n8n-openai-bridge` voor OpenAI-compatibele koppeling
-- streaming responses en behoud van chat history
-- operationele hardening voor productiegebruik
-
-Repository van deze onderzoekslijn:
-
-- [GovChat-NL-LibreChat repository (pre-release)](https://github.com/GovChat-NL/GovChat-NL-LibreChat)
-
-Bijbehorende documentatie:
-
-- [LibreChat pre-release quick start](../handleidingen/librechat-pre-release)
-- [LibreChat pre-release omgevingsvariabelen](../handleidingen/librechat-omgevingsvariabelen)
+Roadmapvoorstellen en voortgang worden bijgehouden via [GitHub Issues](https://github.com/GovChat-NL/GovChat-NL/issues) en [Discussions](https://github.com/GovChat-NL/GovChat-NL/discussions). Een release of feature is pas beschikbaar als deze in de hoofdrepository is gemerged en gedocumenteerd.
 
 ## Bijdragen
 

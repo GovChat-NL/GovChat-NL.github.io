@@ -5,7 +5,7 @@ title: "Wat is GovChat-NL?"
 
 # Wat is GovChat-NL?
 
-GovChat-NL is een open-source platform voor en door Nederlandse overheidsorganisaties dat ondersteunt bij het implementeren en beheren van AI-oplossingen. Het platform is ontstaan bij de **Provincie Limburg** vanuit de behoefte aan een betrouwbare, veilige en toegankelijke digitale assistent voor overheidsmedewerkers.
+GovChat-NL is een open-source AI-platform voor Nederlandse overheidsorganisaties. Het platform is ontstaan bij de **Provincie Limburg** vanuit de behoefte aan een betrouwbare, veilige en toegankelijke digitale assistent voor overheidsmedewerkers. Sinds het stuurgroepbesluit van 13 oktober 2026 is LibreChat de standaard front-end.
 
 ## Waarom GovChat-NL?
 
@@ -33,15 +33,27 @@ Wat één organisatie ontwikkelt, kan iedere andere organisatie gebruiken. Comme
 
 ## Architectuuroverzicht
 
-![GovChat-NL architectuurflow](../img/diagrams/visie-flow.png)
+```mermaid
+flowchart LR
+  User[Gebruiker] --> Auth[SSO/OIDC]
+  Auth --> LC[LibreChat]
+  LC --> Bridge[GovChat bridge]
+  Bridge --> N8N[n8n orchestrator en tools]
+  N8N --> LiteLLM[LiteLLM]
+  LiteLLM --> Models[Modelproviders]
+  N8N --> Cards[Live tool-events]
+  Cards --> LC
+```
 
 ## Technologiestack
 
 | Component | Rol | Documentatie |
 |-----------|-----|-------------|
-| **OpenWebUI** | Web-interface en backend — chat, gebruikersbeheer, App Launcher | [Componenten](../architectuur/componenten) |
-| **LiteLLM** | Router en adapter tussen applicatie en AI-modellen | [LiteLLM](../architectuur/litellm) |
-| **n8n** | Workflow automation voor complexe AI-workflows | [n8n](../architectuur/n8n) |
-| **Apache Tika** | Documentverwerking (PDF, Word, etc.) | [Componenten](../architectuur/componenten) |
-| **Qdrant** | Vector database voor RAG en kennisbank-functionaliteit | [Qdrant](../architectuur/qdrant) |
-| **PostgreSQL** | Database voor gebruikers, chats, configuratie | [Infrastructuur](../architectuur/infrastructuur) |
+| **LibreChat** | Standaard webinterface voor gesprekken en agents | [Architectuur](../architectuur/librechat) |
+| **n8n-openai-bridge** | OpenAI-compatibele route tussen de front-end en n8n; streamt live tool lifecycle-events | [Live tool-calling](../architectuur/live-tool-calling) |
+| **n8n** | Workflow- en agentorkestratie; standaardflows worden automatisch geïmporteerd | [n8n](../architectuur/n8n) |
+| **LiteLLM** | Modelgateway en providerrouter voor de applicatie/workflows | [LiteLLM](../architectuur/litellm) |
+| **MongoDB, Redis, Meilisearch** | LibreChat-applicatiedata, sessies/cache en zoekindex | [Componenten](../architectuur/componenten) |
+| **PostgreSQL, Qdrant** | Aparte n8n/LiteLLM databases en interne OpenBesluitvorming vectorstore | [Componenten](../architectuur/componenten) |
+
+De oudere OpenWebUI-implementatie en gerelateerde deployments zijn legacy. Ze worden niet automatisch gemigreerd naar LibreChat; zie de [legacy-repository](https://github.com/GovChat-NL/GovChat-NL-legacy).

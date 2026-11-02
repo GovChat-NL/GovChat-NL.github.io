@@ -20,9 +20,14 @@ Elke provider heeft een eigen API-formaat, authenticatiemethode en SDK. Zonder t
 
 ## Hoe LiteLLM dit oplost
 
-![LiteLLM routing](../img/diagrams/litellm-routing.png)
+```mermaid
+flowchart LR
+  Client[LibreChat / n8n] -->|OpenAI-compatible API| LiteLLM[LiteLLM]
+  LiteLLM --> Azure[Azure OpenAI]
+  LiteLLM --> Other[Other configured providers]
+```
 
-LiteLLM vertaalt OpenAI-compatibele API-aanroepen naar het formaat van de betreffende provider. Voor OpenWebUI maakt het niet uit welke provider achter een model zit — de API is altijd hetzelfde.
+LiteLLM vertaalt OpenAI-compatibele API-aanroepen naar het formaat van de betreffende provider. LibreChat en n8n kunnen daardoor met modelaliassen communiceren zonder provider-specifieke endpointcode in iedere client/workflow.
 
 ## Kernfunctionaliteit
 
@@ -104,9 +109,9 @@ LiteLLM draait als container binnen de GovChat-NL stack. De volledige service-co
 | `AZURE_API_KEY` | Azure OpenAI API key | `sk-...` |
 | `AZURE_API_VERSION` | Azure API versie | `2024-06-01` |
 
-### Koppeling met OpenWebUI
+### Koppeling met LibreChat en n8n
 
-OpenWebUI is geconfigureerd om LiteLLM als OpenAI-compatibele backend te gebruiken:
+LibreChat en n8n gebruiken LiteLLM als interne OpenAI-compatibele modelgateway. LibreChat gebruikt de geconfigureerde model-endpoints; n8n-agentnodes gebruiken de modelaliases uit de workflow en [`litellm/config.yaml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/litellm/config.yaml):
 
 ```bash
 OPENAI_API_BASE_URL=http://litellm:4000/v1
@@ -136,7 +141,7 @@ model_list:
 docker compose restart litellm
 ```
 
-3. **Het model verschijnt** automatisch in de modelselector van OpenWebUI
+3. **Het model is beschikbaar** aan de geconfigureerde LibreChat endpoint en n8n modelnodes nadat de service is herladen en eventuele workflows opnieuw zijn gepubliceerd
 
 ## Meer informatie
 
