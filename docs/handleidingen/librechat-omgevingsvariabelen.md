@@ -178,4 +178,4 @@ Voer vóór starten uit:
 docker compose --env-file .env config --quiet
 ```
 
-Gebruik `.env.example` alleen als config-interpolatiecheck en start geen productie met templatewaarden. Voor de actuele bronbestanden en extra profielen: zie [de canonical Compose-stack](https://github.com/GovChat-NL/GovChat-NL/blob/main/docker-compose.yml).
+Gebruik `.env.example` alleen als config-interpolatiecheck en start geen productie met templatewaarden. Voor de actuele bronbestanden en extra profielen: zie de [Compose-stack in de GovChat-NL-hoofdrepository](https://github.com/GovChat-NL/GovChat-NL/blob/main/docker-compose.yml).

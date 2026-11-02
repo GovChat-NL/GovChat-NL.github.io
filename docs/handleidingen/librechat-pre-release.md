@@ -26,7 +26,7 @@ De bridge verzorgt de OpenAI-compatibele koppeling tussen LibreChat en de n8n or
 
 ## Installatie
 
-Clone de canonical repository, maak een lokale `.env` van de template en vul de secrets en omgevingswaarden in:
+Clone de GovChat-NL-hoofdrepository, maak een lokale `.env` van de template en vul de secrets en omgevingswaarden in:
 
 ```bash
 git clone https://github.com/GovChat-NL/GovChat-NL.git

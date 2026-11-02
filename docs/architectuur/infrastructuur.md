@@ -7,7 +7,7 @@ title: "Infrastructuur"
 
 ## Deployment opties
 
-De canonical stack wordt als Docker Compose-project beheerd. Dezelfde Compose-configuratie kan draaien op een organisatiebeheerde Linux-host, VM of geschikte containeromgeving; netwerk-, identity- en storage-integratie blijven omgevingsspecifiek.
+De huidige stack wordt als Docker Compose-project beheerd. Dezelfde Compose-configuratie kan draaien op een organisatiebeheerde Linux-host, VM of geschikte containeromgeving; netwerk-, identity- en storage-integratie blijven omgevingsspecifiek.
 
 | Aspect | Referentie-inrichting |
 |-------|-------------------------|

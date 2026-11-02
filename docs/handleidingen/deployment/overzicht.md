@@ -4,7 +4,7 @@ title: "Deployment-overzicht: LibreChat Compose-stack"
 
 # Deployment-overzicht: LibreChat Compose-stack
 
-De huidige GovChat-NL deployment bestaat uit één standaard Compose-project. Compose bouwt de services en interne netwerken, gebruikt health/dependency checks en start de eenmalige workflow-bootstrap. De actuele bron is [`docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/docker-compose.yml) in de canonical repository.
+De huidige GovChat-NL deployment bestaat uit één standaard Compose-project. Compose bouwt de services en interne netwerken, gebruikt health/dependency checks en start de eenmalige workflow-bootstrap. De actuele bron is [`docker-compose.yml`](https://github.com/GovChat-NL/GovChat-NL/blob/main/docker-compose.yml) in de GovChat-NL-hoofdrepository.
 
 ## Standaardservices
 
